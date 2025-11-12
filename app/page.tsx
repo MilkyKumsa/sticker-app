@@ -1,182 +1,158 @@
 "use client";
-
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
+interface Sticker {
+  id: number;
+  title: string;
+  category: string;
+  image: string;
+}
+
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const categories = ["All", "Animals", "Spiritual", "Sports", "Funny", "Cool"];
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [cart, setCart] = useState<Sticker[]>([]);
 
-  const categories = [
-    {
-      name: "Animals",
-      image:
-        "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=600&q=60",
-    },
-    {
-      name: "Spiritual",
-      image:
-        "https://images.unsplash.com/photo-1557672172-298e090bd0f1?auto=format&fit=crop&w=600&q=60",
-    },
-    {
-      name: "Sports",
-      image:
-        "https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=600&q=60",
-    },
-    {
-      name: "Tech",
-      image:
-        "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=60",
-    },
-    {
-      name: "Nature",
-      image:
-        "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=60",
-    },
-  ];
-
-  const stickers = [
-    {
-      name: "Cool Cat",
-      category: "Animals",
-      image: "https://pngimg.com/uploads/cat/cat_PNG50491.png",
-    },
-    {
-      name: "Zen Circle",
-      category: "Spiritual",
-      image:
-        "https://static.vecteezy.com/system/resources/previews/017/350/987/original/zen-circle-free-png.png",
-    },
-    {
-      name: "Football Star",
-      category: "Sports",
-      image: "https://pngimg.com/uploads/football/football_PNG52777.png",
-    },
-    {
-      name: "Laptop Life",
-      category: "Tech",
-      image: "https://pngimg.com/uploads/laptop/laptop_PNG5936.png",
-    },
-    {
-      name: "Mountain View",
-      category: "Nature",
-      image:
-        "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=60",
-    },
+  const stickers: Sticker[] = [
+    { id: 1, title: "Cute Dog", category: "Animals", image: "https://images.unsplash.com/photo-1601758124097-1e31e47b9a5c?auto=format&fit=crop&w=600&q=60" },
+    { id: 2, title: "Meditation Lotus", category: "Spiritual", image: "https://pngall.com/wp-content/uploads/5/Lotus-Flower-PNG-Image.png" },
+    { id: 3, title: "Football Player", category: "Sports", image: "https://pngall.com/wp-content/uploads/5/Football-Player-PNG.png" },
+    { id: 4, title: "Laughing Emoji", category: "Funny", image: "https://pngall.com/wp-content/uploads/13/Laughing-Emoji-PNG.png" },
+    { id: 5, title: "Cool Sunglasses", category: "Cool", image: "https://pngall.com/wp-content/uploads/5/Sunglasses-PNG-Picture.png" },
   ];
 
   const filteredStickers =
-    selectedCategory === "All"
+    activeCategory === "All"
       ? stickers
-      : stickers.filter((s) => s.category === selectedCategory);
+      : stickers.filter((s) => s.category === activeCategory);
+
+  const addToCart = (sticker: Sticker) => {
+    setCart([...cart, sticker]);
+  };
 
   return (
-    <main className="bg-gradient-to-b from-green-50 to-white text-gray-800 min-h-screen">
-
+    <main className="bg-white text-gray-800">
       {/* Hero Section */}
-      <section className="relative h-[70vh] flex flex-col items-center justify-center text-center overflow-hidden">
-        {/* Moving background image */}
+      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
         <motion.div
-          className="absolute inset-0"
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          initial={{ scale: 1 }}
+          animate={{ scale: 1.05 }}
+          transition={{ duration: 20, repeat: Infinity, repeatType: "reverse" }}
+          className="absolute inset-0 z-0"
         >
           <Image
             src="/img1.jpg"
-            alt="Hero Background"
+            alt="Stickers background"
             fill
-            className="object-cover"
-            priority
+            className="object-cover brightness-75"
           />
         </motion.div>
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40" />
-
-        {/* Text Content */}
-        <motion.div
-          className="relative z-10 text-white"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <h1 className="text-5xl sm:text-6xl font-extrabold mb-4">
+        <div className="relative z-10 text-center text-white">
+          <motion.h1
+            initial={{ opacity: 0, y: -40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="text-5xl md:text-7xl font-bold mb-6"
+          >
             Welcome to <span className="text-green-400">WeSticker</span>
-          </h1>
-          <p className="text-lg sm:text-xl mb-8">
-            Your one-stop shop for vibrant, creative, and high-quality stickers!
-          </p>
-          <a
+          </motion.h1>
+          <motion.a
             href="#stickers"
-            className="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-full transition"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg"
           >
             Browse Stickers
-          </a>
-        </motion.div>
+          </motion.a>
+        </div>
       </section>
 
-      {/* Category Cards */}
-      <section className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 px-6 mt-12 mb-12">
-        {categories.map((cat) => (
-          <motion.div
-            key={cat.name}
-            className="relative cursor-pointer rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition"
-            whileHover={{ scale: 1.05 }}
-            onClick={() => setSelectedCategory(cat.name)}
-          >
-            <Image
-              src={cat.image}
-              alt={cat.name}
-              width={400}
-              height={300}
-              className="object-cover w-full h-32 sm:h-40"
-            />
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-              <span className="text-white font-semibold text-lg">{cat.name}</span>
-            </div>
-          </motion.div>
-        ))}
+      {/* How to Order Section */}
+      <section className="py-12 bg-green-50">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <h2 className="text-3xl font-bold text-green-700 mb-4">How to Order</h2>
+          <p className="text-gray-700 text-lg">
+            Browse through our sticker collection below. Click the <span className="font-bold">“+”</span> on any sticker to add it to your cart.
+            Once you have selected your favorite stickers, scroll down to the cart section to review your items.
+            Then proceed to the order page to fill in your details and place your order. It's simple, quick, and fun!
+          </p>
+        </div>
       </section>
 
-      {/* Category Tabs */}
-      <div className="max-w-6xl mx-auto flex gap-3 px-6 mb-6 overflow-x-auto scrollbar-hide">
-        {["All", ...categories.map((c) => c.name)].map((cat) => (
-          <button
-            key={cat}
-            className={`whitespace-nowrap px-4 py-2 rounded-full font-medium transition ${
-              selectedCategory === cat
-                ? "bg-green-500 text-white shadow-lg"
-                : "bg-white text-gray-700 hover:bg-green-100"
-            }`}
-            onClick={() => setSelectedCategory(cat)}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
+      {/* Categories */}
+      <section className="py-12 bg-gray-50" id="stickers">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold text-gray-800 mb-6">Choose a Category</h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-5 py-2 rounded-full font-medium border ${
+                  activeCategory === cat
+                    ? "bg-green-500 text-white border-green-500"
+                    : "bg-white text-gray-700 border-gray-300 hover:border-green-400"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
 
-      {/* Sticker Grid */}
-      <section
-        id="stickers"
-        className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 px-6 mb-16"
-      >
-        {filteredStickers.map((sticker) => (
-          <motion.div
-            key={sticker.name}
-            className="bg-white p-4 rounded-2xl shadow-md hover:shadow-xl transition text-center"
-            whileHover={{ scale: 1.05 }}
-          >
-            <Image
-              src={sticker.image}
-              alt={sticker.name}
-              width={200}
-              height={200}
-              className="mx-auto mb-4"
-            />
-            <h3 className="font-semibold">{sticker.name}</h3>
-          </motion.div>
-        ))}
+        {/* Stickers Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 px-6 md:px-20">
+          {filteredStickers.map((sticker) => (
+            <motion.div
+              key={sticker.id}
+              whileHover={{ scale: 1.05 }}
+              className="relative bg-white rounded-2xl shadow-md p-4 flex flex-col items-center hover:shadow-lg transition"
+            >
+              {/* Plus Sign in top-right corner of the card */}
+              <button
+                onClick={() => addToCart(sticker)}
+                className="absolute top-2 right-2 bg-green-500 hover:bg-green-600 text-white w-8 h-8 flex items-center justify-center rounded-full text-xl font-bold shadow-lg z-10"
+              >
+                +
+              </button>
+
+              <div className="relative w-32 h-32 mb-4">
+                <Image
+                  src={sticker.image}
+                  alt={sticker.title}
+                  fill
+                  className="object-contain bg-white p-2 rounded-lg"
+                />
+              </div>
+              <h3 className="text-lg font-semibold">{sticker.title}</h3>
+              <p className="text-sm text-gray-500">{sticker.category}</p>
+            </motion.div>
+          ))}
+        </div>
       </section>
+
+      {/* Cart Display */}
+      <section className="py-6 bg-gray-100">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-2xl font-bold mb-4">Cart ({cart.length})</h2>
+          {cart.length === 0 ? (
+            <p className="text-gray-600">Your cart is empty.</p>
+          ) : (
+            <ul className="flex flex-wrap gap-4">
+              {cart.map((item, index) => (
+                <li key={index} className="bg-white shadow-md p-2 rounded-lg flex items-center gap-2">
+                  <Image src={item.image} alt={item.title} width={40} height={40} className="rounded-md" />
+                  <span className="font-medium">{item.title}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </section>
+
 
     </main>
   );
