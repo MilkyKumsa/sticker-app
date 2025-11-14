@@ -25,56 +25,56 @@ export default function StickersPage() {
 
   const stickers: Sticker[] = [
     // Animals
-    { id: 1, title: "Cute Dog 1", category: "Animals", image: "https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg?w=600" },
-    { id: 2, title: "Cute Dog 2", category: "Animals", image: "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?w=600" },
-    { id: 3, title: "Cat 1", category: "Animals", image: "https://images.pexels.com/photos/20787/pexels-photo.jpg?w=600" },
-    { id: 4, title: "Cat 2", category: "Animals", image: "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?w=600" },
-    { id: 5, title: "Rabbit 1", category: "Animals", image: "https://images.pexels.com/photos/458799/pexels-photo-458799.jpeg?w=600" },
-    { id: 6, title: "Rabbit 2", category: "Animals", image: "https://images.pexels.com/photos/416160/pexels-photo-416160.jpeg?w=600" },
-    { id: 7, title: "Parrot 1", category: "Animals", image: "https://images.pexels.com/photos/46175/parrot-animals-bird-colorful-46175.jpeg?w=600" },
-    { id: 8, title: "Parrot 2", category: "Animals", image: "https://images.pexels.com/photos/374039/pexels-photo-374039.jpeg?w=600" },
-    { id: 9, title: "Hamster 1", category: "Animals", image: "https://images.pexels.com/photos/104827/cute-animal-pet-hamster-104827.jpeg?w=600" },
-    { id: 10, title: "Hamster 2", category: "Animals", image: "https://images.pexels.com/photos/45170/pexels-photo-45170.jpeg?w=600" },
-    { id: 11, title: "Turtle 1", category: "Animals", image: "https://images.pexels.com/photos/46182/pexels-photo-46182.jpeg?w=600" },
-    { id: 12, title: "Turtle 2", category: "Animals", image: "https://images.pexels.com/photos/1459396/pexels-photo-1459396.jpeg?w=600" },
+    { id: 1, title: "", category: "Animals", image: "/animal/animal_1.jpg" },
+    { id: 2, title: "", category: "Animals", image: "/animal/animal_2.jpg" },
+    { id: 3, title: "", category: "Animals", image: "/animal/animal_3.jpg" },
+    { id: 4, title: "", category: "Animals", image: "/animal/animal_4.jpg" },
+    { id: 5, title: "", category: "Animals", image: "/animal/animal_5.jpg" },
+    { id: 6, title: "", category: "Animals", image: "/animal/animal_6.jpg" },
+    { id: 7, title: "", category: "Animals", image: "/animal/animal_7.jpg" },
+    { id: 8, title: "", category: "Animals", image: "/animal/animal_8.jpg" },
+    { id: 9, title: "", category: "Animals", image: "https://images.pexels.com/photos/104827/cute-animal-pet-hamster-104827.jpeg?w=600" },
+    { id: 10, title: "", category: "Animals", image: "https://images.pexels.com/photos/45170/pexels-photo-45170.jpeg?w=600" },
+    { id: 11, title: "", category: "Animals", image: "https://images.pexels.com/photos/46182/pexels-photo-46182.jpeg?w=600" },
+    { id: 12, title: "", category: "Animals", image: "https://images.pexels.com/photos/1459396/pexels-photo-1459396.jpeg?w=600" },
 
     // Spiritual
-    { id: 13, title: "Meditation 1", category: "Spiritual", image: "https://images.pexels.com/photos/1051838/pexels-photo-1051838.jpeg?w=600" },
-    { id: 14, title: "Meditation 2", category: "Spiritual", image: "https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?w=600" },
-    { id: 15, title: "Lotus 1", category: "Spiritual", image: "https://images.pexels.com/photos/3661261/pexels-photo-3661261.jpeg?w=600" },
-    { id: 16, title: "Lotus 2", category: "Spiritual", image: "https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?w=600" },
-    { id: 17, title: "Zen 1", category: "Spiritual", image: "https://images.pexels.com/photos/3822624/pexels-photo-3822624.jpeg?w=600" },
-    { id: 18, title: "Zen 2", category: "Spiritual", image: "https://images.pexels.com/photos/3822623/pexels-photo-3822623.jpeg?w=600" },
-    { id: 19, title: "Chakra 1", category: "Spiritual", image: "https://images.pexels.com/photos/416405/pexels-photo-416405.jpeg?w=600" },
-    { id: 20, title: "Chakra 2", category: "Spiritual", image: "https://images.pexels.com/photos/356004/pexels-photo-356004.jpeg?w=600" },
-    { id: 21, title: "Mandala 1", category: "Spiritual", image: "https://images.pexels.com/photos/3822625/pexels-photo-3822625.jpeg?w=600" },
-    { id: 22, title: "Mandala 2", category: "Spiritual", image: "https://images.pexels.com/photos/3822626/pexels-photo-3822626.jpeg?w=600" },
-    { id: 23, title: "Prayer Beads 1", category: "Spiritual", image: "https://images.pexels.com/photos/3822627/pexels-photo-3822627.jpeg?w=600" },
-    { id: 24, title: "Prayer Beads 2", category: "Spiritual", image: "https://images.pexels.com/photos/3822628/pexels-photo-3822628.jpeg?w=600" },
+    { id: 13, title: "", category: "Spiritual", image: "/spiritual/spiritual_1.jpg" },
+    { id: 14, title: "", category: "Spiritual", image: "/spiritual/spiritual_2.jpg" },
+    { id: 15, title: "", category: "Spiritual", image: "/spiritual/spiritual_3.jpg" },
+    { id: 16, title: "", category: "Spiritual", image: "/spiritual/spiritual_4.jpg" },
+    { id: 17, title: "", category: "Spiritual", image: "/spiritual/spiritual_5.jpg" },
+    { id: 18, title: "", category: "Spiritual", image: "/spiritual/spiritual_6.jpg" },
+    { id: 19, title: "", category: "Spiritual", image: "/spiritual/spiritual_7.jpg" },
+    { id: 20, title: "", category: "Spiritual", image: "/spiritual/spiritual_8.jpg" },
+    { id: 21, title: "", category: "Spiritual", image: "/spiritual/spiritual_9.jpg" },
+    { id: 22, title: "", category: "Spiritual", image: "https://images.pexels.com/photos/3822626/pexels-photo-3822626.jpeg?w=600" },
+    { id: 23, title: "", category: "Spiritual", image: "https://images.pexels.com/photos/3822627/pexels-photo-3822627.jpeg?w=600" },
+    { id: 24, title: "", category: "Spiritual", image: "https://images.pexels.com/photos/3822628/pexels-photo-3822628.jpeg?w=600" },
 
     // Sports
-    { id: 25, title: "Football 1", category: "Sports", image: "https://images.pexels.com/photos/399187/pexels-photo-399187.jpeg?w=600" },
-    { id: 26, title: "Football 2", category: "Sports", image: "https://images.pexels.com/photos/399188/pexels-photo-399188.jpeg?w=600" },
-    { id: 27, title: "Basketball 1", category: "Sports", image: "https://images.pexels.com/photos/1103827/pexels-photo-1103827.jpeg?w=600" },
-    { id: 28, title: "Basketball 2", category: "Sports", image: "https://images.pexels.com/photos/1103828/pexels-photo-1103828.jpeg?w=600" },
-    { id: 29, title: "Tennis 1", category: "Sports", image: "https://images.pexels.com/photos/114296/pexels-photo-114296.jpeg?w=600" },
-    { id: 30, title: "Tennis 2", category: "Sports", image: "https://images.pexels.com/photos/114297/pexels-photo-114297.jpeg?w=600" },
-    { id: 31, title: "Soccer 1", category: "Sports", image: "https://images.pexels.com/photos/114298/pexels-photo-114298.jpeg?w=600" },
-    { id: 32, title: "Soccer 2", category: "Sports", image: "https://images.pexels.com/photos/114299/pexels-photo-114299.jpeg?w=600" },
-    { id: 33, title: "Hockey 1", category: "Sports", image: "https://images.pexels.com/photos/114300/pexels-photo-114300.jpeg?w=600" },
-    { id: 34, title: "Hockey 2", category: "Sports", image: "https://images.pexels.com/photos/114301/pexels-photo-114301.jpeg?w=600" },
-    { id: 35, title: "Baseball 1", category: "Sports", image: "https://images.pexels.com/photos/114302/pexels-photo-114302.jpeg?w=600" },
-    { id: 36, title: "Baseball 2", category: "Sports", image: "https://images.pexels.com/photos/114303/pexels-photo-114303.jpeg?w=600" },
+    { id: 25, title: "", category: "Sports", image: "/sport/sport_1.jpg" },
+    { id: 26, title: "", category: "Sports", image: "/sport/sport_2.jpg" },
+    { id: 27, title: "", category: "Sports", image: "/sport/sport_3.jpg" },
+    { id: 28, title: "", category: "Sports", image: "/sport/sport_4.jpg" },
+    { id: 29, title: "", category: "Sports", image: "/sport/sport_5.jpg" },
+    { id: 30, title: "", category: "Sports", image: "/sport/sport_6.jpg" },
+    { id: 31, title: "", category: "Sports", image: "/sport/sport_7.jpg" },
+    { id: 32, title: "", category: "Sports", image: "/sport/sport_8.jpg" },
+    { id: 33, title: "", category: "Sports", image: "https://images.pexels.com/photos/114300/pexels-photo-114300.jpeg?w=600" },
+    { id: 34, title: "", category: "Sports", image: "https://images.pexels.com/photos/114301/pexels-photo-114301.jpeg?w=600" },
+    { id: 35, title: "", category: "Sports", image: "https://images.pexels.com/photos/114302/pexels-photo-114302.jpeg?w=600" },
+    { id: 36, title: "", category: "Sports", image: "https://images.pexels.com/photos/114303/pexels-photo-114303.jpeg?w=600" },
 
     // Funny
-    { id: 37, title: "Laughing Emoji 1", category: "Funny", image: "https://images.pexels.com/photos/207983/pexels-photo-207983.jpeg?w=600" },
-    { id: 38, title: "Laughing Emoji 2", category: "Funny", image: "https://images.pexels.com/photos/208349/pexels-photo-208349.jpeg?w=600" },
-    { id: 39, title: "Meme 1", category: "Funny", image: "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?w=600" },
-    { id: 40, title: "Meme 2", category: "Funny", image: "https://images.pexels.com/photos/1108098/pexels-photo-1108098.jpeg?w=600" },
-    { id: 41, title: "Sticker 1", category: "Funny", image: "https://images.pexels.com/photos/3822640/pexels-photo-3822640.jpeg?w=600" },
-    { id: 42, title: "Sticker 2", category: "Funny", image: "https://images.pexels.com/photos/3822641/pexels-photo-3822641.jpeg?w=600" },
-    { id: 43, title: "Funny Cat 1", category: "Funny", image: "https://images.pexels.com/photos/3822642/pexels-photo-3822642.jpeg?w=600" },
-    { id: 44, title: "Funny Cat 2", category: "Funny", image: "https://images.pexels.com/photos/3822643/pexels-photo-3822643.jpeg?w=600" },
+    { id: 37, title: "", category: "Funny", image: "https://images.pexels.com/photos/207983/pexels-photo-207983.jpeg?w=600" },
+    { id: 38, title: "", category: "Funny", image: "https://images.pexels.com/photos/208349/pexels-photo-208349.jpeg?w=600" },
+    { id: 39, title: "", category: "Funny", image: "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?w=600" },
+    { id: 40, title: "", category: "Funny", image: "https://images.pexels.com/photos/1108098/pexels-photo-1108098.jpeg?w=600" },
+    { id: 41, title: "", category: "Funny", image: "https://images.pexels.com/photos/3822640/pexels-photo-3822640.jpeg?w=600" },
+    { id: 42, title: "", category: "Funny", image: "https://images.pexels.com/photos/3822641/pexels-photo-3822641.jpeg?w=600" },
+    { id: 43, title: "", category: "Funny", image: "https://images.pexels.com/photos/3822642/pexels-photo-3822642.jpeg?w=600" },
+    { id: 44, title: "", category: "Funny", image: "https://images.pexels.com/photos/3822643/pexels-photo-3822643.jpeg?w=600" },
 
     // Cool
     { id: 45, title: "Sunglasses 1", category: "Cool", image: "https://images.pexels.com/photos/302083/pexels-photo-302083.jpeg?w=600" },
@@ -110,10 +110,7 @@ export default function StickersPage() {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center h-16">
           <div className="flex items-center gap-3">
-            <Image src="/img1.jpg" alt="Logo" width={40} height={40} className="rounded-full" />
-            <h1 className="text-2xl font-extrabold bg-gradient-to-r from-green-500 to-emerald-700 bg-clip-text text-transparent">
-              WeSticker
-            </h1>
+            <Image src="/animal/animal_5.jpg" alt="Logo" width={40} height={40} className="rounded-full" />
           </div>
 
           <div className="hidden md:flex gap-6 text-sm font-semibold">

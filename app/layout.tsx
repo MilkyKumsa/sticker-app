@@ -9,7 +9,6 @@ export const metadata = {
     icon: "/dog.jpg",
   },
 };
-
 export default function RootLayout({
   children,
 }: {
@@ -20,13 +19,18 @@ export default function RootLayout({
       <body className="bg-green-50 text-gray-800">
         {/* 🧩 Page Content */}
         <main>{children}</main>
-
         {/* 📜 Footer */}
-        <footer className="bg-green-700 text-white text-center py-6 mt-16">
-          <p>© {new Date().getFullYear()} WeSticker. All rights reserved.</p>
-          <p className="text-sm opacity-80">Crafted with ❤️ using Next.js</p>
+        <footer className="bg-green-700 text-white text-center py-6">
+          <p>© {new Date().getFullYear()} Stickify. All rights reserved.</p>
         </footer>
       </body>
     </html>
   );
 }
+
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});

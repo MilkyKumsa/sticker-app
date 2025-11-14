@@ -31,14 +31,14 @@ export default function Home() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scrolled ? "bg-white/90 shadow-md backdrop-blur-md" : "bg-white/40 backdrop-blur-sm"
+          scrolled ? "bg-white/90 shadow-md " : "bg-white/40 backdrop-blur-sm"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center h-16">
           <div className="flex items-center gap-3">
-            <Image src="/img1.jpg" alt="Logo" width={40} height={40} className="rounded-full" />
-            <h1 className="text-2xl font-extrabold bg-gradient-to-r from-green-500 to-emerald-700 bg-clip-text text-transparent">
-              WeSticker
+            <Image src="/animal/animal_5.jpg" alt="Logo" width={40} height={40} className="rounded-full" />
+            <h1 className="text-2xl font-extrabold bg-clip-text text-transparent">
+              Stickify
             </h1>
           </div>
 
@@ -78,20 +78,20 @@ export default function Home() {
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
           className="absolute inset-0 z-0"
         >
-          <Image src="/img1.jpg" alt="Hero" fill className="object-cover brightness-75" />
-        </motion.div>
+          <Image src="/img4.jpg" alt="Hero" fill className="object-cover brightness-75 blur-[4px]"/>
+        </motion.div> 
 
         <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-4">
-            Welcome to <span className="text-green-400">WeSticker</span>
+          <h1 className="text-17xl xl:text-7xl font-extrabold mb-4">
+            Welcome to <span className="text-green-400">Stickify</span>
           </h1>
-          <p className="max-w-xl mx-auto mb-6">
-            Personalize your world — choose your favorite stickers and express yourself!
+          <p className="max-w-xl mx-auto mb-6 font-extrabold">
+            Stick Your Story. Express Yourself.
           </p>
 
           <a
             href="/stickers"
-            className="inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-semibold shadow"
+            className="inline-block bg-green-500 hover:bg-green-600 text-white px-12  py-3 rounded-full font-bold shadow"
           >
             Browse Stickers
           </a>
@@ -144,13 +144,13 @@ export default function Home() {
   <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
     {/* BASIC */}
     <div className="bg-white p-10 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition">
-      <h3 className="text-2xl font-bold text-green-700">Basic Pack</h3>
+      <h3 className="text-2xl font-bold text-green-700">Small Pack</h3>
       <p className="text-gray-500 mt-2 mb-6">Perfect for small orders</p>
 
-      <p className="text-4xl font-extrabold text-gray-800 mb-6">$5</p>
+      <p className="text-4xl font-extrabold text-gray-800 mb-6">40 ETB</p>
 
       <ul className="text-gray-600 space-y-2 mb-6">
-        <li>✔ 5 Stickers</li>
+        <li>✔ 15x15cm Stickers</li>
         <li>✔ Matte or Glossy</li>
         <li>✔ High-quality print</li>
       </ul>
@@ -172,10 +172,10 @@ export default function Home() {
       <h3 className="text-2xl font-bold text-green-700">Standard Pack</h3>
       <p className="text-gray-500 mt-2 mb-6">Perfect for regular use</p>
 
-      <p className="text-4xl font-extrabold text-gray-800 mb-6">$10</p>
+      <p className="text-4xl font-extrabold text-gray-800 mb-6">60 ETB</p>
 
       <ul className="text-gray-600 space-y-2 mb-6">
-        <li>✔ 15 Stickers</li>
+        <li>✔ 30x30cm Stickers</li>
         <li>✔ Matte or Glossy</li>
         <li>✔ Custom sizes available</li>
       </ul>
@@ -190,13 +190,13 @@ export default function Home() {
 
     {/* PREMIUM */}
     <div className="bg-white p-10 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition">
-      <h3 className="text-2xl font-bold text-green-700">Premium Pack</h3>
+      <h3 className="text-2xl font-bold text-green-700">Large Pack</h3>
       <p className="text-gray-500 mt-2 mb-6">Best for large projects</p>
 
-      <p className="text-4xl font-extrabold text-gray-800 mb-6">$20</p>
+      <p className="text-4xl font-extrabold text-gray-800 mb-6">100 ETB</p>
 
       <ul className="text-gray-600 space-y-2 mb-6">
-        <li>✔ 40 Stickers</li>
+        <li>✔ 50x50cm Stickers</li>
         <li>✔ Matte, Glossy, or Transparent</li>
         <li>✔ Priority printing</li>
       </ul>
