@@ -101,11 +101,9 @@ export default function Home() {
 <section
   id="how"
   className="py-20 px-8 text-center"
-    id="how"
-  className="py-20 px-8 text-center"
   style={{
     backgroundColor: "#E6F4EA", // soft light green
-  }}  
+  }}
 >
   <h2 className="text-4xl font-bold text-green-700 mb-6">How to Order</h2>
 
