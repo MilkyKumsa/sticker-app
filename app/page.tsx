@@ -221,41 +221,71 @@ export default function Home() {
     Have questions, suggestions, or want a custom sticker order? Fill out the form below and we'll get back to you as soon as possible!
   </p>
 
-  {/* CONTACT FORM */}
-  <form 
-    className="max-w-xl mx-auto bg-green-50 p-8 rounded-2xl shadow-lg space-y-5"
-    onSubmit={(e) => {
-      e.preventDefault();
-      alert("Form submitted! Connect backend to send email.");
-    }}
+<form
+  className="max-w-xl mx-auto bg-green-50 p-8 rounded-2xl shadow-lg space-y-5"
+  onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+
+    // Type-safe access to form elements
+    const nameInput = form.elements.namedItem("name") as HTMLInputElement;
+    const emailInput = form.elements.namedItem("email") as HTMLInputElement;
+    const messageInput = form.elements.namedItem("message") as HTMLTextAreaElement;
+
+    const data = {
+      name: nameInput.value,
+      email: emailInput.value,
+      message: messageInput.value,
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        alert("Message sent successfully!");
+        form.reset();
+      } else {
+        alert("Failed to send message. Please try again later.");
+      }
+    } catch (err) {
+      alert("Error sending message. Please try again later.");
+      console.error(err);
+    }
+  }}
+>
+  <input
+    name="name"
+    type="text"
+    placeholder="Your Name"
+    className="w-full border-2 border-green-400 p-3 rounded-lg bg-white focus:ring-2 focus:ring-green-400"
+    required
+  />
+  <input
+    name="email"
+    type="email"
+    placeholder="Your Email"
+    className="w-full border-2 border-green-400 p-3 rounded-lg bg-white focus:ring-2 focus:ring-green-400"
+    required
+  />
+  <textarea
+    name="message"
+    placeholder="Your Message"
+    className="w-full border-2 border-green-400 p-3 rounded-lg h-32 resize-none bg-white focus:ring-2 focus:ring-green-400"
+    required
+  />
+  <button
+    type="submit"
+    className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg text-lg transition"
   >
-    <input
-      type="text"
-      placeholder="Your Name"
-      className="w-full border-2 border-green-400 p-3 rounded-lg bg-white focus:ring-2 focus:ring-green-400"
-      required
-    />
+    Send Message
+  </button>
+</form>
 
-    <input
-      type="email"
-      placeholder="Your Email"
-      className="w-full border-2 border-green-400 p-3 rounded-lg bg-white focus:ring-2 focus:ring-green-400"
-      required
-    />
 
-    <textarea
-      placeholder="Your Message"
-      className="w-full border-2 border-green-400 p-3 rounded-lg h-32 resize-none bg-white focus:ring-2 focus:ring-green-400"
-      required
-    ></textarea>
-
-    <button
-      type="submit"
-      className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg text-lg transition"
-    >
-      Send Message
-    </button>
-  </form>
 
   {/* SOCIAL MEDIA ICONS */}
   <h3 className="text-2xl font-semibold text-green-700 mt-14">Follow Us</h3>
