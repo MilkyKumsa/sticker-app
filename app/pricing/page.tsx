@@ -57,13 +57,13 @@ export default function Home() {
             transition={{ duration: 1 }}
             className="text-5xl md:text-7xl font-bold mb-6"
           >
-            Welcome to <span className="text-green-400">WeSticker</span>
+            Welcome to <span className="text-indigo-200">WeSticker</span>
           </motion.h1>
           <motion.a
             href="#stickers"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg"
+            className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg"
           >
             Browse Stickers
           </motion.a>
@@ -81,8 +81,8 @@ export default function Home() {
                 onClick={() => setActiveCategory(cat)}
                 className={`px-5 py-2 rounded-full font-medium border ${
                   activeCategory === cat
-                    ? "bg-green-500 text-white border-green-500"
-                    : "bg-white text-gray-700 border-gray-300 hover:border-green-400"
+                    ? "bg-indigo-500 text-white border-indigo-500"
+                    : "bg-white text-gray-700 border-gray-300 hover:border-indigo-400"
                 }`}
               >
                 {cat}
@@ -109,7 +109,7 @@ export default function Home() {
                 {/* Plus Sign */}
                 <button
                   onClick={() => addToCart(sticker)}
-                  className="absolute top-1 right-1 bg-green-500 hover:bg-green-600 text-white w-8 h-8 flex items-center justify-center rounded-full text-xl font-bold shadow-lg"
+                  className="absolute top-1 right-1 bg-gradient-to-br from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white w-8 h-8 flex items-center justify-center rounded-full text-xl font-bold shadow-lg"
                 >
                   +
                 </button>
@@ -141,7 +141,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-green-600 text-white text-center py-6 mt-12">
+      <footer className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-center py-6 mt-12">
         <p>© {new Date().getFullYear()} WeSticker. All Rights Reserved.</p>
       </footer>
     </main>

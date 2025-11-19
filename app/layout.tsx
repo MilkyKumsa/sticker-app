@@ -1,6 +1,5 @@
 import "./globals.css";
-import Link from "next/link";
-import Image from "next/image";
+import { Poppins } from "next/font/google";
 
 export const metadata = {
   title: "WeSticker",
@@ -9,28 +8,34 @@ export const metadata = {
     icon: "/dog.jpg",
   },
 };
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-app",
+});
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="bg-green-50 text-gray-800">
-        {/* 🧩 Page Content */}
-        <main>{children}</main>
-        {/* 📜 Footer */}
-        <footer className="bg-green-700 text-white text-center py-6">
-          <p>© {new Date().getFullYear()} Stickify. All rights reserved.</p>
-        </footer>
+    <html lang="en" className="bg-stone-50">
+      <body
+        className={`${poppins.variable} font-sans bg-gradient-to-b from-[#eef2ff] via-white to-[#f5f3ff] text-slate-800 antialiased`}
+      >
+        <div className="relative min-h-screen">
+          <div className="pointer-events-none fixed inset-0 opacity-70 mix-blend-overlay blur-3xl"></div>
+          <main className="relative z-10">{children}</main>
+          <footer className="relative z-10 mt-16 border-t border-indigo-100 bg-white/80 backdrop-blur-sm">
+            <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-6 py-10 text-sm text-gray-500 md:flex-row md:justify-between">
+              <p>© {new Date().getFullYear()} Stickify — Crafted with care.</p>
+              <div className="flex gap-4 text-xs uppercase tracking-[0.2em] text-gray-400">
+                <span>Custom Prints</span>
+                <span>Eco Inks</span>
+                <span>Worldwide</span>
+              </div>
+            </div>
+          </footer>
+        </div>
       </body>
     </html>
   );
 }
-
-import { Poppins } from "next/font/google";
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-});

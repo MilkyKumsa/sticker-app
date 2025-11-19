@@ -134,7 +134,8 @@ export default function StickersPage() {
   };
 
   return (
-    <main className="bg-white min-h-screen text-gray-800 scroll-smooth">
+    <main className="relative min-h-screen bg-gradient-to-b from-[#eef2ff] via-white to-[#f5f3ff] text-gray-800 scroll-smooth">
+      <div className="pointer-events-none absolute inset-0 gradient-ring opacity-80"></div>
       {/* NAVBAR */}
       <motion.nav
         initial={{ y: -60, opacity: 0 }}
@@ -147,22 +148,22 @@ export default function StickersPage() {
         <div className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center h-16">
           <div className="flex items-center gap-3">
             <Image src="/animal/animal_5.jpg" alt="Logo" width={40} height={40} className="rounded-full" />
-            <h1 className="text-2xl font-extrabold bg-gradient-to-r from-green-500 to-emerald-700 bg-clip-text text-transparent">
+            <h1 className="text-2xl font-extrabold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
               WeSticker
             </h1>
           </div>
 
           <div className="hidden md:flex gap-6 text-sm font-semibold">
-            <a href="/" className="text-gray-700 hover:text-green-600">Home</a>
-            <a href="/#how" className="text-gray-700 hover:text-green-600">Order</a>
-            <a href="/#pricing" className="text-gray-700 hover:text-green-600">Pricing</a>
-            <a href="/#contact" className="text-gray-700 hover:text-green-600">Contact</a>
-            <a href="/stickers" className="text-green-600">Stickers</a>
+            <a href="/" className="text-gray-700 hover:text-indigo-500">Home</a>
+            <a href="/#how" className="text-gray-700 hover:text-indigo-500">Order</a>
+            <a href="/#pricing" className="text-gray-700 hover:text-indigo-500">Pricing</a>
+            <a href="/#contact" className="text-gray-700 hover:text-indigo-500">Contact</a>
+            <a href="/stickers" className="text-indigo-600">Stickers</a>
           </div>
 
           <motion.button
             whileHover={{ scale: 1.07 }}
-            className="ml-4 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full font-medium shadow-md"
+            className="ml-4 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white px-4 py-2 rounded-full font-medium shadow-md shadow-indigo-200"
             onClick={() => setShowCart(true)}
           >
             Cart ({cart.length})
@@ -171,16 +172,22 @@ export default function StickersPage() {
       </motion.nav>
 
       {/* PAGE CONTENT */}
-      <div className="pt-28 px-6 max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-12 text-green-700">Browse Stickers</h1>
+      <div className="relative z-10 pt-28 px-6 max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <p className="text-xs uppercase tracking-[0.3em] text-indigo-400">Collections</p>
+          <h1 className="text-4xl font-bold text-indigo-700 mt-3">Browse Stickers</h1>
+          <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
+            Hand-picked capsules organized by mood. Tap any design to pick a size and add it to your cart.
+          </p>
+        </div>
 
         {/* Centered Category Navbar */}
-        <div className="flex justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => scrollToSection(cat)}
-              className="px-5 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-green-500 hover:text-white transition"
+              className="px-5 py-2 rounded-full border border-white/70 bg-white/60 text-gray-700 shadow-sm transition hover:-translate-y-0.5 hover:bg-indigo-500 hover:text-white"
             >
               {cat}
             </button>
@@ -195,8 +202,9 @@ export default function StickersPage() {
 
           return (
             <section key={cat} id={cat} className="mb-16">
-              <div className="flex justify-center mb-6">
-                <h2 className="text-3xl font-semibold text-green-600">{cat}</h2>
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-3xl font-semibold text-indigo-600">{cat}</h2>
+                <span className="text-sm uppercase tracking-[0.3em] text-gray-400">{catStickers.length} pcs</span>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
@@ -205,17 +213,17 @@ export default function StickersPage() {
                   return (
                     <motion.div
                       key={sticker.id}
-                      whileHover={{ scale: 1.05 }}
-                      className="relative bg-white p-4 rounded-2xl shadow-[0_2px_6px_rgba(0,0,0,0.05)] text-center"
+                      whileHover={{ scale: 1.03, translateY: -4 }}
+                      className="relative rounded-3xl border border-white/70 bg-white/80 p-4 text-center shadow-lg shadow-indigo-50"
                     >
                       <button
                         onClick={() => {
                           if (inCart) removeFromCart(sticker.id);
                           else setShowSizeMenu((id) => (id === sticker.id ? null : sticker.id));
                         }}
-                        className={`absolute top-2 right-2 w-8 h-8 text-xl rounded-full ${
-                          inCart ? "bg-red-500 text-white" : "bg-green-500 text-white"
-                        } flex items-center justify-center`}
+                        className={`absolute top-2 right-2 w-9 h-9 text-xl rounded-full flex items-center justify-center shadow ${
+                          inCart ? "bg-red-500 text-white" : "bg-gradient-to-br from-indigo-500 to-purple-500 text-white"
+                        }`}
                         aria-label={inCart ? "Remove from cart" : "Add to cart / choose size"}
                       >
                         {inCart ? "×" : "+"}
@@ -229,22 +237,22 @@ export default function StickersPage() {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -6, scale: 0.98 }}
                             transition={{ duration: 0.12 }}
-                            className="absolute right-3 top-12 bg-white shadow-lg p-2 rounded-xl border text-sm z-20 w-36"
+                            className="absolute right-3 top-12 bg-white shadow-xl p-3 rounded-2xl border text-sm z-20 w-40"
                           >
                             <button
-                              className="block w-full text-left px-3 py-2 hover:bg-green-50 rounded"
+                              className="block w-full text-left px-3 py-2 hover:bg-indigo-50 rounded"
                               onClick={() => addToCartWithSize(sticker, "Small (5 cm)")}
                             >
                               Small (5 cm)
                             </button>
                             <button
-                              className="block w-full text-left px-3 py-2 hover:bg-green-50 rounded"
+                              className="block w-full text-left px-3 py-2 hover:bg-indigo-50 rounded"
                               onClick={() => addToCartWithSize(sticker, "Medium (8 cm)")}
                             >
                               Medium (8 cm)
                             </button>
                             <button
-                              className="block w-full text-left px-3 py-2 hover:bg-green-50 rounded"
+                              className="block w-full text-left px-3 py-2 hover:bg-indigo-50 rounded"
                               onClick={() => addToCartWithSize(sticker, "Large (12 cm)")}
                             >
                               Large (12 cm)
@@ -262,7 +270,7 @@ export default function StickersPage() {
                         />
                       </div>
 
-                      <h3 className="mt-3 font-semibold">{sticker.title || `${sticker.category} sticker`}</h3>
+                      <h3 className="mt-3 font-semibold text-slate-900">{sticker.title || `${sticker.category} sticker`}</h3>
                       {inCart && (
                         <p className="text-sm text-gray-500 mt-1">
                           Size: {cart.find((s) => s.id === sticker.id)?.size}
@@ -277,7 +285,7 @@ export default function StickersPage() {
                 <div className="flex justify-center mt-6">
                   <button
                     onClick={() => setExpanded((prev) => ({ ...prev, [cat]: !prev[cat] }))}
-                    className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full transition"
+                    className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white px-6 py-2 rounded-full transition shadow-lg shadow-indigo-100"
                   >
                     {showAll ? "See Less" : "See More"}
                   </button>
@@ -295,7 +303,7 @@ export default function StickersPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.4 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black z-50"
+              className="fixed inset-0 bg-slate-900/70 z-50 backdrop-blur-sm"
               onClick={() => setShowCart(false)}
             />
             <motion.div
@@ -304,10 +312,10 @@ export default function StickersPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 30 }}
               transition={{ type: "spring", stiffness: 260, damping: 26 }}
-              className="fixed bottom-6 right-6 w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 z-50"
+              className="fixed bottom-6 right-6 w-full max-w-md rounded-3xl border border-white/60 bg-white/95 shadow-[0_25px_80px_rgba(15,118,110,0.25)] p-6 z-50"
             >
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-bold text-green-700">Your Cart</h3>
+                <h3 className="text-xl font-bold text-indigo-700">Your Cart</h3>
                 <button
                   className="text-gray-500 hover:text-gray-700"
                   onClick={() => setShowCart(false)}
@@ -331,7 +339,7 @@ export default function StickersPage() {
                             className="object-contain rounded-lg bg-gray-50"
                           />
                         </div>
-                        <div className="flex-1">
+                      <div className="flex-1">
                           <p className="font-semibold text-sm">{item.title}</p>
                           <p className="text-xs text-gray-500">{item.size}</p>
                         </div>
@@ -345,7 +353,7 @@ export default function StickersPage() {
                     ))}
                   </ul>
                   <button
-                    className="mt-5 w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold shadow-sm transition"
+                    className="mt-5 w-full bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white py-3 rounded-xl font-semibold shadow-sm transition"
                     onClick={() => {
                       setShowCart(false);
                       router.push("/checkout");

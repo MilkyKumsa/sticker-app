@@ -24,46 +24,50 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-white text-gray-800 scroll-smooth">
+    <main className="relative overflow-hidden bg-transparent text-gray-800 scroll-smooth">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(129,140,248,0.25),transparent_45%),radial-gradient(circle_at_80%_0%,rgba(147,197,253,0.25),transparent_55%)]"></div>
       {/* NAVBAR */}
       <motion.nav
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scrolled ? "bg-white/90 shadow-md " : "bg-white/40 backdrop-blur-sm"
+          scrolled
+            ? "bg-white/80 border border-white/70 shadow-[0_15px_60px_rgba(15,118,110,0.12)] backdrop-blur-xl"
+            : "bg-white/40 border border-white/60 shadow-none backdrop-blur-2xl"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center h-16">
           <div className="flex items-center gap-3">
             <Image src="/animal/animal_5.jpg" alt="Logo" width={40} height={40} className="rounded-full" />
-            <h1 className="text-2xl font-extrabold bg-clip-text text-transparent">
+            <h1 className="text-2xl font-extrabold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
               Stickify
             </h1>
           </div>
 
           <div className="hidden md:flex gap-8 text-sm font-semibold">
-            <a href="#hero" className={activeSection === "hero" ? "text-green-600" : "text-gray-700"}>
+            <a href="#hero" className={activeSection === "hero" ? "text-indigo-600" : "text-gray-700"}>
               Home
             </a>
-            <a href="#how" className={activeSection === "how" ? "text-green-600" : "text-gray-700"}>
+            <a href="#how" className={activeSection === "how" ? "text-indigo-600" : "text-gray-700"}>
               Order
             </a>
-            <a href="#pricing" className={activeSection === "pricing" ? "text-green-600" : "text-gray-700"}>
+            <a href="#pricing" className={activeSection === "pricing" ? "text-indigo-600" : "text-gray-700"}>
               Pricing
             </a>
-            <a href="#contact" className={activeSection === "contact" ? "text-green-600" : "text-gray-700"}>
+            <a href="#contact" className={activeSection === "contact" ? "text-indigo-600" : "text-gray-700"}>
               Contact
             </a>
             {/* NEW: Stickers Page Link */}
-            <a href="/stickers" className="text-gray-700 hover:text-green-600">
+            <a href="/stickers" className="text-gray-700 hover:text-indigo-500">
               Stickers
             </a>
           </div>
 
           <motion.button
-            whileHover={{ scale: 1.07 }}
-            className="ml-4 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full font-medium shadow-md"
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.98 }}
+            className="ml-4 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white px-5 py-2 rounded-full font-medium shadow-lg shadow-indigo-200"
           >
             Cart
           </motion.button>
@@ -71,158 +75,135 @@ export default function Home() {
       </motion.nav>
 
       {/* HERO */}
-      <section id="hero" className="relative h-[70vh] flex items-center justify-center overflow-hidden">
+      <section id="hero" className="relative min-h-[70vh] flex items-center justify-center overflow-hidden px-6">
         <motion.div
           initial={{ scale: 1 }}
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
           className="absolute inset-0 z-0"
         >
-          <Image src="/img4.jpg" alt="Hero" fill className="object-cover brightness-75 blur-[4px]"/>
+          <Image src="/img4.jpg" alt="Hero" fill className="object-cover brightness-75 blur-[4px]" />
         </motion.div> 
 
-        <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-17xl xl:text-7xl font-extrabold mb-4">
-            Welcome to <span className="text-green-400">Stickify</span>
+        <div className="relative z-10 glass-panel max-w-3xl text-center px-10 py-12">
+          <p className="text-xs uppercase tracking-[0.4em] text-indigo-200 mb-4">Premium Stickers & Prints</p>
+          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-4">
+            Stick Your <span className="text-indigo-200">Story</span>, Define Your Space
           </h1>
-          <p className="max-w-xl mx-auto mb-6 font-extrabold">
-            Stick Your Story. Express Yourself.
+          <p className="max-w-xl mx-auto mb-8 font-medium text-white/90">
+            We craft expressive sticker sets for brands, creators, and dreamers. Order sustainably printed designs that
+            effortlessly elevate laptops, bottles, and packaging.
           </p>
 
           <a
             href="/stickers"
-            className="inline-block bg-green-500 hover:bg-green-600 text-white px-12  py-3 rounded-full font-bold shadow"
+            className="inline-block bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white px-12  py-3 rounded-full font-bold shadow"
           >
             Browse Stickers
           </a>
         </div>
       </section>
 
-<section
-  id="how"
-  className="py-20 px-8 text-center"
-  style={{
-    backgroundColor: "#E6F4EA", // soft light green
-  }}
->
-  <h2 className="text-4xl font-bold text-green-700 mb-6">How to Order</h2>
-
-  <p className="text-gray-700 max-w-3xl mx-auto text-lg leading-relaxed">
-    Follow these simple steps to place an order:
-    <br /><br />
-
-    <span className="font-bold">1. Browse Stickers:</span> Scroll through the stickers and explore all categories.
-    <br /><br />
-
-    <span className="font-bold">2. Add to Cart:</span> Click the <span className="font-bold">“+”</span> button on any sticker to add it to your cart.  
-    Click <span className="font-bold">“×”</span> to remove it.
-    <br /><br />
-
-    <span className="font-bold">3. Contact Us:</span> Fill out the form with your details so we can confirm your order.
-    <br /><br />
-
-    <span className="font-bold">4. Order Confirmation:</span> We’ll reach out to finalize everything and start preparing your stickers!
-  </p>
-</section>
+      <section id="how" className="py-20 px-6 md:px-10">
+        <div className="mx-auto max-w-5xl glass-panel px-10 py-14 text-center">
+          <p className="text-xs uppercase tracking-[0.3em] text-indigo-400">Process</p>
+          <h2 className="text-4xl font-bold text-indigo-700 mt-3 mb-10">How to Order</h2>
+          <div className="grid gap-10 md:grid-cols-4 text-left">
+            {[
+              { title: "Browse", desc: "Explore curated packs across animals, tech, art, and more." },
+              { title: "Select", desc: "Tap + on your favorites and pick your perfect size." },
+              { title: "Share", desc: "Tell us about your project and deliverables in one form." },
+              { title: "Confirm", desc: "We finalize proofing, print with eco-inks, and ship worldwide." },
+            ].map((step, idx) => (
+              <div key={step.title} className="rounded-2xl border border-white/70 bg-white/70 p-5 shadow-sm">
+                <span className="text-sm font-semibold text-indigo-500">0{idx + 1}</span>
+                <h3 className="mt-2 text-xl font-semibold text-slate-900">{step.title}</h3>
+                <p className="mt-2 text-sm text-slate-500">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* PRICING */}
       <section
-  id="pricing"
-  className="py-24 px-8 text-center"
-  style={{
-    backgroundImage:
-      "radial-gradient(circle at 10px 10px, rgba(16,185,129,0.07) 1px, transparent 0)",
-    backgroundSize: "44px 44px",
-  }}
->
-  <h2 className="text-4xl font-bold text-green-700 mb-4">Pricing</h2>
-
-  <p className="text-gray-700 max-w-2xl mx-auto mb-14 text-lg">
-    Simple and transparent pricing. No hidden charges. Choose what fits your needs!
-  </p>
-
-  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
-    {/* BASIC */}
-    <div className="bg-white p-10 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition">
-      <h3 className="text-2xl font-bold text-green-700">Small Pack</h3>
-      <p className="text-gray-500 mt-2 mb-6">Perfect for small orders</p>
-
-      <p className="text-4xl font-extrabold text-gray-800 mb-6">40 ETB</p>
-
-      <ul className="text-gray-600 space-y-2 mb-6">
-        <li>✔ 15x15cm Stickers</li>
-        <li>✔ Matte or Glossy</li>
-        <li>✔ High-quality print</li>
-      </ul>
-
-      <a
-        href="#order"
-        className="block bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl transition font-medium"
+        id="pricing"
+        className="py-24 px-6 md:px-10 bg-[radial-gradient(circle_at_10px_10px,rgba(129,140,248,0.08)_1px,transparent_0)] bg-[length:44px_44px]"
       >
-        Order Now
-      </a>
-    </div>
+        <div className="text-center mb-16">
+          <p className="text-xs uppercase tracking-[0.3em] text-indigo-400">Simple Plans</p>
+          <h2 className="text-4xl font-bold text-indigo-700 mt-3">Pricing</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto mt-4">
+            Transparent packages for every scale — from a single storyboard to a brand-wide rollout.
+          </p>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+          {[
+            {
+              name: "Small Pack",
+              desc: "Perfect for small orders",
+              price: "40 ETB",
+              perks: ["15x15 cm Stickers", "Matte or Glossy", "High-quality print"],
+            },
+            {
+              name: "Standard Pack",
+              desc: "Our most loved tier",
+              price: "60 ETB",
+              perks: ["30x30 cm Stickers", "Matte or Glossy", "Custom sizes available"],
+              featured: true,
+            },
+            {
+              name: "Large Pack",
+              desc: "For serious sticker drops",
+              price: "100 ETB",
+              perks: ["50x50 cm Stickers", "Matte, Glossy, or Transparent", "Priority printing"],
+            },
+          ].map((plan) => (
+            <div
+              key={plan.name}
+              className={`relative rounded-3xl border p-10 shadow-xl transition hover:-translate-y-1 ${
+                plan.featured
+                  ? "border-indigo-200 bg-gradient-to-b from-white via-white to-indigo-50"
+                  : "border-white/80 bg-white"
+              }`}
+            >
+              {plan.featured && (
+                <span className="absolute -top-3 right-8 rounded-full bg-indigo-500 px-4 py-1 text-xs font-semibold text-white">
+                  Best Value
+                </span>
+              )}
+              <h3 className="text-2xl font-bold text-indigo-700">{plan.name}</h3>
+              <p className="text-gray-500 mt-2 mb-6">{plan.desc}</p>
+              <p className="text-4xl font-black text-gray-900 mb-6">{plan.price}</p>
+              <ul className="text-gray-600 space-y-2 mb-6">
+                {plan.perks.map((perk) => (
+                  <li key={perk}>✔ {perk}</li>
+                ))}
+              </ul>
+              <a
+                href="#contact"
+                className="block rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 py-3 text-center font-semibold text-white shadow-indigo-200"
+              >
+                Order Now
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
 
-    {/* STANDARD */}
-    <div className="bg-white p-10 rounded-2xl shadow-lg border border-green-400 hover:shadow-xl transition relative">
-      <span className="absolute top-3 right-3 bg-green-500 text-white text-xs px-3 py-1 rounded-full">
-        Best Value
-      </span>
 
-      <h3 className="text-2xl font-bold text-green-700">Standard Pack</h3>
-      <p className="text-gray-500 mt-2 mb-6">Perfect for regular use</p>
+      <section id="contact" className="py-24 px-6 text-center">
+        <div className="mx-auto max-w-4xl">
+          <p className="text-xs uppercase tracking-[0.3em] text-indigo-400">Say Hello</p>
+          <h2 className="text-4xl font-bold text-indigo-700 mt-3 mb-6">Contact Us</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto mb-12">
+            Need a custom illustration pack, rush order, or wholesale collaboration? Drop us a note and we will reach you
+            within 24 hours.
+          </p>
+        </div>
 
-      <p className="text-4xl font-extrabold text-gray-800 mb-6">60 ETB</p>
-
-      <ul className="text-gray-600 space-y-2 mb-6">
-        <li>✔ 30x30cm Stickers</li>
-        <li>✔ Matte or Glossy</li>
-        <li>✔ Custom sizes available</li>
-      </ul>
-
-      <a
-        href="#order"
-        className="block bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl transition font-medium"
-      >
-        Order Now
-      </a>
-    </div>
-
-    {/* PREMIUM */}
-    <div className="bg-white p-10 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition">
-      <h3 className="text-2xl font-bold text-green-700">Large Pack</h3>
-      <p className="text-gray-500 mt-2 mb-6">Best for large projects</p>
-
-      <p className="text-4xl font-extrabold text-gray-800 mb-6">100 ETB</p>
-
-      <ul className="text-gray-600 space-y-2 mb-6">
-        <li>✔ 50x50cm Stickers</li>
-        <li>✔ Matte, Glossy, or Transparent</li>
-        <li>✔ Priority printing</li>
-      </ul>
-
-      <a
-        href="#order"
-        className="block bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl transition font-medium"
-      >
-        Order Now
-      </a>
-    </div>
-  </div>
-</section>
-
-
-      <section
-  id="contact"
-  className="py-24 px-6 text-center bg-white"
->
-  <h2 className="text-4xl font-bold text-green-700 mb-6">Contact Us</h2>
-  <p className="text-gray-700 max-w-2xl mx-auto mb-12 text-lg">
-    Have questions, suggestions, or want a custom sticker order? Fill out the form below and we'll get back to you as soon as possible!
-  </p>
-
-<form
-  className="max-w-xl mx-auto bg-green-50 p-8 rounded-2xl shadow-lg space-y-5"
+        <form
+          className="max-w-xl mx-auto glass-panel space-y-5 p-8"
   onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -261,25 +242,25 @@ export default function Home() {
     name="name"
     type="text"
     placeholder="Your Name"
-    className="w-full border-2 border-green-400 p-3 rounded-lg bg-white focus:ring-2 focus:ring-green-400"
+  className="w-full border-2 border-indigo-400 p-3 rounded-lg bg-white focus:ring-2 focus:ring-indigo-400"
     required
   />
   <input
     name="email"
     type="email"
     placeholder="Your Email"
-    className="w-full border-2 border-green-400 p-3 rounded-lg bg-white focus:ring-2 focus:ring-green-400"
+  className="w-full border-2 border-indigo-400 p-3 rounded-lg bg-white focus:ring-2 focus:ring-indigo-400"
     required
   />
   <textarea
     name="message"
     placeholder="Your Message"
-    className="w-full border-2 border-green-400 p-3 rounded-lg h-32 resize-none bg-white focus:ring-2 focus:ring-green-400"
+  className="w-full border-2 border-indigo-400 p-3 rounded-lg h-32 resize-none bg-white focus:ring-2 focus:ring-indigo-400"
     required
   />
   <button
     type="submit"
-    className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg text-lg transition"
+    className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white py-3 rounded-xl text-lg font-semibold shadow-lg shadow-indigo-200 transition"
   >
     Send Message
   </button>
@@ -288,41 +269,25 @@ export default function Home() {
 
 
   {/* SOCIAL MEDIA ICONS */}
-  <h3 className="text-2xl font-semibold text-green-700 mt-14">Follow Us</h3>
-
-  <div className="flex justify-center gap-10 mt-6">
-    <a
-      href="https://facebook.com"
-      target="_blank"
-      className="p-4 bg-green-50 rounded-full shadow-md hover:scale-110 transition"
-    >
-      <img src="/icons/facebook.png" alt="Facebook" className="w-7 h-7" />
-    </a>
-
-    <a
-      href="https://instagram.com"
-      target="_blank"
-      className="p-4 bg-green-50 rounded-full shadow-md hover:scale-110 transition"
-    >
-      <img src="/icons/instagram.png" alt="Instagram" className="w-7 h-7" />
-    </a>
-
-    <a
-      href="https://t.me"
-      target="_blank"
-      className="p-4 bg-green-50 rounded-full shadow-md hover:scale-110 transition"
-    >
-      <img src="/icons/telegram.png" alt="Telegram" className="w-7 h-7" />
-    </a>
-
-    <a
-      href="mailto:yourshop@gmail.com"
-      className="p-4 bg-green-50 rounded-full shadow-md hover:scale-110 transition"
-    >
-      <img src="/icons/tiktok.png" alt="Tiktok" className="w-7 h-7" />
-    </a>
-  </div>
-</section>
+        <h3 className="text-2xl font-semibold text-indigo-700 mt-14">Follow Us</h3>
+        <div className="flex justify-center gap-6 mt-6">
+          {[
+            { icon: "/icons/facebook.png", href: "https://facebook.com" },
+            { icon: "/icons/instagram.png", href: "https://instagram.com" },
+            { icon: "/icons/telegram.png", href: "https://t.me" },
+            { icon: "/icons/tiktok.png", href: "mailto:yourshop@gmail.com" },
+          ].map((link) => (
+            <a
+              key={link.icon}
+              href={link.href}
+              target="_blank"
+              className="flex h-14 w-14 items-center justify-center rounded-full border border-white/50 bg-white/80 shadow-md shadow-indigo-100 transition hover:-translate-y-1"
+            >
+              <img src={link.icon} alt="Social icon" className="h-6 w-6" />
+            </a>
+          ))}
+        </div>
+      </section>
 
     </main>
   );

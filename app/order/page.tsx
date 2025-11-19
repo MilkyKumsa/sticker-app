@@ -26,8 +26,8 @@ Quantity: ${formData.quantity}`);
   };
 
   return (
-    <main className="min-h-screen bg-green-50 py-12 px-6 md:px-20">
-      <h1 className="text-4xl font-bold text-green-700 text-center mb-8">Place Your Order</h1>
+    <main className="min-h-screen bg-indigo-50 py-12 px-6 md:px-20">
+      <h1 className="text-4xl font-bold text-indigo-700 text-center mb-8">Place Your Order</h1>
       <form
         onSubmit={handleSubmit}
         className="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-lg"
@@ -41,7 +41,7 @@ Quantity: ${formData.quantity}`);
             value={formData.name}
             onChange={handleChange}
             required
-            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
           />
         </label>
 
@@ -54,7 +54,7 @@ Quantity: ${formData.quantity}`);
             value={formData.email}
             onChange={handleChange}
             required
-            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
           />
         </label>
 
@@ -66,7 +66,7 @@ Quantity: ${formData.quantity}`);
             value={formData.sticker}
             onChange={handleChange}
             required
-            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
           >
             <option value="" disabled>Select a sticker</option>
             {stickers.map((s) => (
@@ -85,14 +85,14 @@ Quantity: ${formData.quantity}`);
             onChange={handleChange}
             min={1}
             required
-            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
           />
         </label>
 
         {/* Submit */}
         <button
           type="submit"
-          className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-xl shadow-lg transition-colors"
+          className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-semibold py-3 rounded-xl shadow-lg transition-colors"
         >
           Place Order
         </button>

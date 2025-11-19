@@ -1,26 +1,37 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-app), "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  *, *::before, *::after {
+    @apply transition-colors duration-200;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply m-0 min-h-screen bg-[var(--background)] text-[var(--foreground)] font-sans leading-relaxed;
+  }
+
+  ::selection {
+    @apply bg-indigo-200 text-slate-900;
+  }
+
+  .glass-panel {
+    @apply rounded-3xl border border-white/60 bg-white/60 shadow-[0_20px_70px_rgba(15,118,110,0.12)] backdrop-blur-xl;
+  }
+
+  .gradient-ring {
+    background: radial-gradient(circle at top, rgba(129, 140, 248, 0.3), transparent 55%),
+      radial-gradient(circle at bottom, rgba(192, 132, 252, 0.25), transparent 60%);
+  }
 }

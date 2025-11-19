@@ -53,31 +53,33 @@ export default function CheckoutPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-green-50 to-white text-gray-800 pt-28 pb-16 px-6">
-      <div className="max-w-5xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
+    <main className="relative min-h-screen bg-gradient-to-b from-[#eef2ff] via-white to-[#f5f3ff] text-gray-800 pt-28 pb-16 px-6">
+      <div className="pointer-events-none absolute inset-0 gradient-ring opacity-80"></div>
+      <div className="relative z-10 max-w-5xl mx-auto">
+        <div className="flex flex-wrap justify-between items-center gap-4 mb-10">
           <div>
-            <h1 className="text-4xl font-bold text-green-700">Checkout</h1>
-            <p className="text-gray-500 mt-1">Review your stickers before placing the order.</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-indigo-400">Secure Checkout</p>
+            <h1 className="text-4xl font-bold text-indigo-700 mt-2">Review & Confirm</h1>
+            <p className="text-gray-500 mt-1">Take one last look before we start printing.</p>
           </div>
-          <Link href="/stickers" className="text-green-600 hover:text-green-700 font-semibold">
+          <Link href="/stickers" className="text-indigo-600 hover:text-indigo-700 font-semibold">
             ← Back to Stickers
           </Link>
         </div>
 
         {items.length === 0 ? (
-          <div className="bg-white rounded-2xl p-10 shadow-lg text-center">
+          <div className="glass-panel text-center p-12">
             <p className="text-gray-500 mb-6">Your cart is empty. Head back and add some stickers!</p>
             <Link
               href="/stickers"
-              className="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold"
+              className="inline-block bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white px-8 py-3 rounded-xl font-semibold shadow-lg shadow-indigo-200"
             >
               Browse Stickers
             </Link>
           </div>
         ) : (
           <div className="grid lg:grid-cols-3 gap-8">
-            <section className="lg:col-span-2 bg-white rounded-2xl shadow-lg p-6 space-y-6">
+            <section className="lg:col-span-2 glass-panel p-6 space-y-6">
               {items.map((item) => {
                 const price = item.size ? sizePricing[item.size] ?? 0 : 0;
                 return (
@@ -85,17 +87,17 @@ export default function CheckoutPage() {
                     key={item.id}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="flex items-center gap-4 border-b pb-4 last:border-b-0 last:pb-0"
+                    className="flex items-center gap-4 border-b border-white/70 pb-4 last:border-b-0 last:pb-0"
                   >
                     <div className="relative w-20 h-20 flex-shrink-0">
                       <Image src={item.image} alt={item.title} fill className="object-contain rounded-xl bg-gray-50" />
                     </div>
                     <div className="flex-1">
-                      <p className="font-semibold">{item.title}</p>
+                      <p className="font-semibold text-slate-900">{item.title}</p>
                       <p className="text-sm text-gray-500">{item.size ?? "Size not selected"}</p>
                     </div>
                     <div className="text-right">
-                      <p className="font-bold text-green-700">{price} ETB</p>
+                      <p className="font-bold text-indigo-700">{price} ETB</p>
                       <button onClick={() => removeItem(item.id)} className="text-xs text-red-500 mt-1 hover:underline">
                         Remove
                       </button>
@@ -105,8 +107,8 @@ export default function CheckoutPage() {
               })}
             </section>
 
-            <section className="bg-white rounded-2xl shadow-lg p-6 h-fit">
-              <h2 className="text-2xl font-semibold text-green-700 mb-4">Order Summary</h2>
+            <section className="glass-panel p-6 h-fit">
+              <h2 className="text-2xl font-semibold text-indigo-700 mb-4">Order Summary</h2>
               <div className="space-y-3 text-sm text-gray-600">
                 {items.map((item) => {
                   const price = item.size ? sizePricing[item.size] ?? 0 : 0;
@@ -118,11 +120,11 @@ export default function CheckoutPage() {
                   );
                 })}
               </div>
-              <div className="border-t mt-4 pt-4 flex justify-between text-lg font-bold text-gray-800">
+              <div className="border-t border-white/70 mt-4 pt-4 flex justify-between text-lg font-bold text-gray-800">
                 <span>Total</span>
                 <span>{total} ETB</span>
               </div>
-              <button className="mt-6 w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold">
+              <button className="mt-6 w-full bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white py-3 rounded-xl font-semibold shadow-lg shadow-indigo-200">
                 Place Order
               </button>
             </section>
