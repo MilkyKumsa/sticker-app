@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 interface Sticker {
   id: number;
@@ -12,10 +13,12 @@ interface Sticker {
 }
 
 export default function StickersPage() {
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [cart, setCart] = useState<Sticker[]>([]);
   const [expanded, setExpanded] = useState<{ [key: string]: boolean }>({});
   const [showSizeMenu, setShowSizeMenu] = useState<number | null>(null);
+  const [showCart, setShowCart] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
@@ -88,19 +91,41 @@ export default function StickersPage() {
     { id: 52, title: "Cool Cat 2", category: "Cool", image: "https://images.pexels.com/photos/302090/pexels-photo-302090.jpeg?w=600" },
   ];
 
-  const addToCartWithSize = (sticker: Sticker, size: string) => {
-    // prevent adding duplicate same sticker (single entry per sticker id)
-    if (cart.some((s) => s.id === sticker.id)) {
-      // if exists, replace size
-      setCart((prev) => prev.map((s) => (s.id === sticker.id ? { ...s, size } : s)));
-    } else {
-      setCart((prev) => [...prev, { ...sticker, size }]);
+  const updateCartState = (updater: (prev: Sticker[]) => Sticker[]) => {
+    setCart((prev) => {
+      const next = updater(prev);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("stickersCart", JSON.stringify(next));
+      }
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("stickersCart");
+      if (saved) {
+        try {
+          setCart(JSON.parse(saved));
+        } catch (error) {
+          console.error("Failed to parse saved cart", error);
+        }
+      }
     }
+  }, []);
+
+  const addToCartWithSize = (sticker: Sticker, size: string) => {
+    updateCartState((prev) => {
+      if (prev.some((s) => s.id === sticker.id)) {
+        return prev.map((s) => (s.id === sticker.id ? { ...s, size } : s));
+      }
+      return [...prev, { ...sticker, size }];
+    });
     setShowSizeMenu(null);
   };
 
   const removeFromCart = (id: number) => {
-    setCart((prev) => prev.filter((s) => s.id !== id));
+    updateCartState((prev) => prev.filter((s) => s.id !== id));
   };
 
   const scrollToSection = (id: string) => {
@@ -138,6 +163,7 @@ export default function StickersPage() {
           <motion.button
             whileHover={{ scale: 1.07 }}
             className="ml-4 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full font-medium shadow-md"
+            onClick={() => setShowCart(true)}
           >
             Cart ({cart.length})
           </motion.button>
@@ -261,6 +287,78 @@ export default function StickersPage() {
           );
         })}
       </div>
+      <AnimatePresence>
+        {showCart && (
+          <>
+            <motion.div
+              key="cart-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.4 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black z-50"
+              onClick={() => setShowCart(false)}
+            />
+            <motion.div
+              key="cart-panel"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 30 }}
+              transition={{ type: "spring", stiffness: 260, damping: 26 }}
+              className="fixed bottom-6 right-6 w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 z-50"
+            >
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-bold text-green-700">Your Cart</h3>
+                <button
+                  className="text-gray-500 hover:text-gray-700"
+                  onClick={() => setShowCart(false)}
+                  aria-label="Close cart"
+                >
+                  ×
+                </button>
+              </div>
+              {cart.length === 0 ? (
+                <p className="text-gray-500 text-sm">You haven’t selected any stickers yet.</p>
+              ) : (
+                <>
+                  <ul className="space-y-4 max-h-80 overflow-y-auto pr-2">
+                    {cart.map((item) => (
+                      <li key={item.id} className="flex items-center gap-4 border-b pb-3">
+                        <div className="relative w-14 h-14 flex-shrink-0">
+                          <Image
+                            src={item.image}
+                            alt={item.title}
+                            fill
+                            className="object-contain rounded-lg bg-gray-50"
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-semibold text-sm">{item.title}</p>
+                          <p className="text-xs text-gray-500">{item.size}</p>
+                        </div>
+                        <button
+                          onClick={() => removeFromCart(item.id)}
+                          className="text-xs text-red-500 hover:text-red-600 font-semibold"
+                        >
+                          Remove
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                  <button
+                    className="mt-5 w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold shadow-sm transition"
+                    onClick={() => {
+                      setShowCart(false);
+                      router.push("/checkout");
+                    }}
+                  >
+                    Let’s Proceed to Checkout
+                  </button>
+                </>
+              )}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
