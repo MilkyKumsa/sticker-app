@@ -1,18 +1,28 @@
-// app/api/sendnorder/route.ts
+// app/api/sendOrder/route.ts
 import { NextResponse } from "next/server";
+
+interface Sticker {
+  name: string;
+  price: number;
+}
+
+interface Order {
+  name: string;
+  phone: string;
+  stickers: Sticker[];
+}
 
 export async function POST(request: Request) {
   try {
-    const order = await request.json();
+    const order: Order = await request.json();
 
-    // Make sure order.stickers exists and is an array
     if (!order.stickers || !Array.isArray(order.stickers)) {
       return NextResponse.json({ error: "Invalid order format" }, { status: 400 });
     }
 
     // Format the stickers for Telegram
     const formattedStickers = order.stickers
-      .map(sticker => `• ${sticker.name} — $${sticker.price}`)
+      .map((sticker: Sticker) => `• ${sticker.name} — $${sticker.price}`)
       .join("\n");
 
     // Build the Telegram message
@@ -44,7 +54,6 @@ ${formattedStickers}
       return NextResponse.json({ error: "Failed to send Telegram message" }, { status: 500 });
     }
 
-    // Respond back to the client
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Send order error:", error);
