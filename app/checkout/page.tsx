@@ -21,6 +21,9 @@ const sizePricing: Record<string, number> = {
 
 export default function CheckoutPage() {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [showForm, setShowForm] = useState(false); // modal visibility
+  const [formData, setFormData] = useState({ name: "", phone: "" });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -52,10 +55,48 @@ export default function CheckoutPage() {
     });
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/sendOrder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          orders: items.map((item) => ({
+            title: item.title,
+            size: item.size,
+          })),
+          total,
+        }),
+      });
+
+      if (!res.ok) throw new Error("API error");
+
+      alert("Order sent successfully!");
+      setFormData({ name: "", phone: "" });
+      setShowForm(false);
+      setItems([]);
+      localStorage.removeItem("stickersCart");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to send order. Check console.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <main className="relative min-h-screen bg-gradient-to-b from-[#eef2ff] via-white to-[#f5f3ff] text-gray-800 pt-28 pb-16 px-6">
       <div className="pointer-events-none absolute inset-0 gradient-ring opacity-80"></div>
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative max-w-5xl mx-auto">
         <div className="flex flex-wrap justify-between items-center gap-4 mb-10">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-indigo-400">Secure Checkout</p>
@@ -124,14 +165,71 @@ export default function CheckoutPage() {
                 <span>Total</span>
                 <span>{total} ETB</span>
               </div>
-              <button className="mt-6 w-full bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white py-3 rounded-xl font-semibold shadow-lg shadow-indigo-200">
+
+              {/* Place Order button */}
+              <button
+                onClick={() => setShowForm(true)}
+                className="mt-6 w-full bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white py-3 rounded-xl font-semibold shadow-lg shadow-indigo-200"
+              >
                 Place Order
               </button>
             </section>
           </div>
         )}
       </div>
+
+      {/* Modal Form */}
+      {showForm && (
+        <div className="fixed inset-0 bg-white bg-opacity-20 backdrop-blur-sm flex items-center justify-center z-50">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white p-8 rounded-xl shadow-lg w-80 z-50 relative"
+          >
+            <h2 className="text-xl font-bold mb-4">Enter Your Details</h2>
+
+            <label className="block mb-4">
+              <span>Name</span>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="mt-1 w-full border px-2 py-1 rounded"
+              />
+            </label>
+
+            <label className="block mb-4">
+              <span>Phone</span>
+              <input
+                type="text"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+                className="mt-1 w-full border px-2 py-1 rounded"
+              />
+            </label>
+
+            <div className="flex justify-between mt-6">
+              <button
+                type="button"
+                onClick={() => setShowForm(false)}
+                className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 rounded bg-indigo-500 text-white hover:bg-indigo-600"
+                disabled={loading}
+              >
+                {loading ? "Sending..." : "Submit"}
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </main>
   );
 }
-
