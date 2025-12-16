@@ -21,7 +21,7 @@ const sizePricing: Record<string, number> = {
 
 export default function CheckoutPage() {
   const [items, setItems] = useState<CartItem[]>([]);
-  const [showForm, setShowForm] = useState(false); // modal visibility
+  const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({ name: "", phone: "" });
   const [loading, setLoading] = useState(false);
 
@@ -63,6 +63,21 @@ export default function CheckoutPage() {
     e.preventDefault();
     setLoading(true);
 
+    if (items.length === 0) {
+      alert("Your cart is empty!");
+      setLoading(false);
+      return;
+    }
+
+    const orderItems = items.map((item) => ({
+      sticker: item.title,
+      size: item.size ?? "Not selected",
+      price: item.size ? sizePricing[item.size] ?? 0 : 0,
+    }));
+
+    const payableAmount = orderItems.reduce((sum, item) => sum + item.price, 0);
+
+    let data;
     try {
       const res = await fetch("/api/sendOrder", {
         method: "POST",
@@ -70,27 +85,25 @@ export default function CheckoutPage() {
         body: JSON.stringify({
           name: formData.name,
           phone: formData.phone,
-          orders: items.map((item) => ({
-            title: item.title,
-            size: item.size,
-          })),
-          total,
+          items: orderItems,
+          payableAmount,
         }),
       });
 
-      if (!res.ok) throw new Error("API error");
-
-      alert("Order sent successfully!");
-      setFormData({ name: "", phone: "" });
-      setShowForm(false);
-      setItems([]);
-      localStorage.removeItem("stickersCart");
-    } catch (err) {
-      console.error(err);
-      alert("Failed to send order. Check console.");
-    } finally {
+      data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to send order");
+    } catch (err: any) {
+      alert(err.message);
       setLoading(false);
+      return;
     }
+
+    alert("Order sent successfully!");
+    localStorage.removeItem("stickersCart");
+    setItems([]);
+    setShowForm(false);
+    setFormData({ name: "", phone: "" });
+    setLoading(false);
   };
 
   return (
@@ -166,7 +179,6 @@ export default function CheckoutPage() {
                 <span>{total} ETB</span>
               </div>
 
-              {/* Place Order button */}
               <button
                 onClick={() => setShowForm(true)}
                 className="mt-6 w-full bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white py-3 rounded-xl font-semibold shadow-lg shadow-indigo-200"
@@ -178,52 +190,21 @@ export default function CheckoutPage() {
         )}
       </div>
 
-      {/* Modal Form */}
       {showForm && (
         <div className="fixed inset-0 bg-white bg-opacity-20 backdrop-blur-sm flex items-center justify-center z-50">
-          <form
-            onSubmit={handleSubmit}
-            className="bg-white p-8 rounded-xl shadow-lg w-80 z-50 relative"
-          >
+          <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-lg w-80 z-50 relative">
             <h2 className="text-xl font-bold mb-4">Enter Your Details</h2>
-
             <label className="block mb-4">
               <span>Name</span>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="mt-1 w-full border px-2 py-1 rounded"
-              />
+              <input type="text" name="name" value={formData.name} onChange={handleChange} required className="mt-1 w-full border px-2 py-1 rounded" />
             </label>
-
             <label className="block mb-4">
               <span>Phone</span>
-              <input
-                type="text"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-                className="mt-1 w-full border px-2 py-1 rounded"
-              />
+              <input type="text" name="phone" value={formData.phone} onChange={handleChange} required className="mt-1 w-full border px-2 py-1 rounded" />
             </label>
-
             <div className="flex justify-between mt-6">
-              <button
-                type="button"
-                onClick={() => setShowForm(false)}
-                className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="px-4 py-2 rounded bg-indigo-500 text-white hover:bg-indigo-600"
-                disabled={loading}
-              >
+              <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Cancel</button>
+              <button type="submit" className="px-4 py-2 rounded bg-indigo-500 text-white hover:bg-indigo-600" disabled={loading}>
                 {loading ? "Sending..." : "Submit"}
               </button>
             </div>

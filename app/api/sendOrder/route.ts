@@ -1,62 +1,50 @@
-// app/api/sendOrder/route.ts
 import { NextResponse } from "next/server";
 
-interface Sticker {
-  name: string;
-  price: number;
-}
-
-interface Order {
-  name: string;
-  phone: string;
-  stickers: Sticker[];
-}
-
-export async function POST(request: Request) {
+export async function POST(req: Request) {
   try {
-    const order: Order = await request.json();
+    const body = await req.json();
 
-    if (!order.stickers || !Array.isArray(order.stickers)) {
-      return NextResponse.json({ error: "Invalid order format" }, { status: 400 });
+    const botToken = process.env.TELEGRAM_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
+
+    if (!botToken || !chatId) {
+      return NextResponse.json({ error: "Telegram env vars missing" }, { status: 500 });
     }
 
-    // Format the stickers for Telegram
-    const formattedStickers = order.stickers
-      .map((sticker: Sticker) => `• ${sticker.name} — $${sticker.price}`)
-      .join("\n");
+    if (!body.name || !body.phone || !body.items || !body.payableAmount) {
+      return NextResponse.json({ error: "Missing order data" }, { status: 400 });
+    }
 
-    // Build the Telegram message
-    const telegramMessage = `
-🛒 New Sticker Order
+    // Build message
+    const message =
+      `🛒 *NEW ORDER*\n\n` +
+      `*Name:* ${body.name}\n` +
+      `*Phone:* ${body.phone}\n\n` +
+      body.items.map((item: any, i: number) =>
+        `${i + 1}. *Sticker:* ${item.sticker}\n   *Size:* ${item.size}\n   *Price:* ${item.price} ETB`
+      ).join("\n\n") +
+      `\n\n*Total Payable:* ${body.payableAmount} ETB`;
 
-👤 Name: ${order.name}
-📞 Phone: ${order.phone}
-📝 Orders:
-${formattedStickers}
-    `.trim();
+    // Send to Telegram
+    const tgRes = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: message,
+        parse_mode: "Markdown",
+      }),
+    });
 
-    // Send message to Telegram
-    const response = await fetch(
-      `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendMessage`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: process.env.TELEGRAM_CHAT_ID,
-          text: telegramMessage,
-          parse_mode: "Markdown",
-        }),
-      }
-    );
+    const tgData = await tgRes.json();
 
-    if (!response.ok) {
-      console.error("Telegram API error:", await response.text());
-      return NextResponse.json({ error: "Failed to send Telegram message" }, { status: 500 });
+    if (!tgData.ok) {
+      return NextResponse.json({ error: tgData.description || "Telegram send failed" }, { status: 500 });
     }
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error("Send order error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  } catch (err: any) {
+    console.error("Error in sendOrder API:", err);
+    return NextResponse.json({ error: err.message || "Internal server error" }, { status: 500 });
   }
 }
