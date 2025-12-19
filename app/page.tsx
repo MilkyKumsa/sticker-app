@@ -239,19 +239,19 @@ export default function Home() {
       {
         name: "Michael Abebe",
         role: "CEO, EthioMart",
-        text: "Tesfa Marketing completely transformed our brand identity and digital presence. Their creativity and strategic approach delivered exceptional results.",
-        avatar: "/avatars/avatar1.jpg",
+        text: "stickerbet completely transformed our brand identity and digital presence. Their creativity and strategic approach delivered exceptional results.",
+        avatar: "/avatars/avatar3.jpg",
       },
       {
         name: "Helen Getachew",
         role: "Marketing Director, Selam Bank",
-        text: "Top-notch digital campaigns and outstanding customer service. Our ROI has never been better thanks to their expertise.",
+        text: "Top-notch stickers and outstanding customer service.",
         avatar: "/avatars/avatar2.jpg",
       },
       {
         name: "Dawit Lemma",
         role: "Founder, TechFlow",
-        text: "Exceptional results and creative flair! They turned our vision into reality with stunning designs and powerful campaigns.",
+        text: "Exceptional results and creative flair! They turned our vision into reality with stunning designs",
         avatar: "/avatars/avatar3.jpg",
       },
     ].map((t) => (
