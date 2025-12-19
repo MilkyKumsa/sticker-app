@@ -147,10 +147,10 @@ export default function Home() {
           <h2 className="text-4xl font-bold text-indigo-700 mt-3 mb-10">How to Order</h2>
           <div className="grid gap-10 md:grid-cols-4 text-left">
             {[
-              { title: "Browse", desc: "Explore curated packs across animals, tech, art, and more." },
+              { title: "Browse", desc: "Explore curated packs across multiple categories" },
               { title: "Select", desc: "Tap + on your favorites and pick your perfect size." },
-              { title: "Share", desc: "Tell us about your project and deliverables in one form." },
-              { title: "Confirm", desc: "We finalize proofing, print with eco-inks, and ship worldwide." },
+              { title: "Confirm", desc: "Proceed to checkout page and confirm sticker choices with quantity." },
+              { title: "Submit", desc: "Fill in your name and your phone and submit. Done! you'll be contacted shortly." },
             ].map((step, idx) => (
               <div key={idx} className="rounded-2xl border border-white/70 bg-white/70 p-5 shadow-sm">
                 <span className="text-sm font-semibold text-indigo-500">0{idx + 1}</span>
@@ -160,6 +160,64 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </section>
+
+  
+     {/* Trusted Clients Section */}
+      <section className="bg-gray-50 py-12">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-2xl font-bold mb-6 text-center">
+            Trusted by Leading Clients
+          </h2>
+
+          <div className="overflow-hidden relative">
+            <div className="flex animate-slide gap-8 min-w-max">
+              {/* Logos repeated for seamless loop */}
+              {[
+                "/logos/client-a.png",
+                "/logos/client-b.png",
+                "/logos/client-c.png",
+                "/logos/client-d.png",
+                "/logos/client-e.png",
+                "/logos/client-f.png",
+                "/logos/client-g.png"
+              ]
+                .concat([
+                  "/logos/client-a.png",
+                  "/logos/client-b.png",
+                  "/logos/client-c.png",
+                  "/logos/client-d.png",
+                  "/logos/client-e.png",
+                  "/logos/client-f.png",
+                ])
+                .map((logo, idx) => (
+                  <div key={idx} className="w-32 h-16 relative flex-shrink-0">
+                    <Image
+                      src={logo}
+                      alt={`Client ${idx + 1}`}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                ))}
+            </div>
+          </div>
+        </div>
+
+        <style jsx>{`
+          @keyframes slide {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-50%);
+            }
+          }
+          .animate-slide {
+            display: flex;
+            animation: slide 20s linear infinite;
+          }
+        `}</style>
       </section>
 
       {/* PRICING */}
