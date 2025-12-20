@@ -48,61 +48,72 @@ export default function Home() {
 
   return (
     <main className="relative overflow-hidden bg-transparent text-gray-800 scroll-smooth">
-      {/* NAVBAR */}
-      <motion.nav
-        initial={{ y: -60, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-white/80 border border-white/70 shadow-[0_15px_60px_rgba(15,118,110,0.12)] backdrop-blur-xl"
-            : "bg-white/40 border border-white/60 shadow-none backdrop-blur-2xl"
-        }`}
+    {/* NAVBAR */}
+<motion.nav
+  initial={{ y: -60, opacity: 0 }}
+  animate={{ y: 0, opacity: 1 }}
+  transition={{ duration: 0.6 }}
+  className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+    scrolled
+      ? "bg-white/80 border border-white/70 shadow-[0_15px_60px_rgba(15,118,110,0.12)] backdrop-blur-xl"
+      : "bg-white/40 border border-white/60 shadow-none backdrop-blur-2xl"
+  }`}
+>
+  <div className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center h-16">
+    {/* Logo */}
+    <div className="flex items-center gap-3">
+      <Image
+        src="/animal/animal_5.jpg"
+        alt="Logo"
+        width={40}
+        height={40}
+        className="rounded-full"
+      />
+      <h1 className="text-2xl font-extrabold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
+        StickerBet
+      </h1>
+    </div>
+
+    {/* Navigation */}
+    <div className="hidden md:flex gap-8 text-sm font-semibold">
+      <a
+        href="#hero"
+        className={activeSection === "hero" ? "text-indigo-600" : "text-gray-700"}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <Image src="/animal/animal_5.jpg" alt="Logo" width={40} height={40} className="rounded-full" />
-            <h1 className="text-2xl font-extrabold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
-              StickerBet
-            </h1>
-          </div>
+        Home
+      </a>
+      <a
+        href="#how"
+        className={activeSection === "how" ? "text-indigo-600" : "text-gray-700"}
+      >
+        Order
+      </a>
+      <a
+        href="#pricing"
+        className={activeSection === "pricing" ? "text-indigo-600" : "text-gray-700"}
+      >
+        Pricing
+      </a>
+      <a
+        href="#testimonials"
+        className={activeSection === "testimonials" ? "text-indigo-600" : "text-gray-700"}
+      >
+        Testimonials
+      </a>
+      <a
+        href="#contact"
+        className={activeSection === "contact" ? "text-indigo-600" : "text-gray-700"}
+      >
+        Contact
+      </a>
+      <a href="/stickers" className="text-gray-700 hover:text-indigo-500">
+        Stickers
+      </a>
+    </div>
 
-          {/* Navigation */}
-          <div className="hidden md:flex gap-8 text-sm font-semibold">
-            <a href="#hero" className={activeSection === "hero" ? "text-indigo-600" : "text-gray-700"}>
-              Home
-            </a>
-            <a href="#how" className={activeSection === "how" ? "text-indigo-600" : "text-gray-700"}>
-              Order
-            </a>
-            <a href="#pricing" className={activeSection === "pricing" ? "text-indigo-600" : "text-gray-700"}>
-              Pricing
-            </a>
-            <a
-              href="#testimonials"
-              className={activeSection === "testimonials" ? "text-indigo-600" : "text-gray-700"}
-            >
-              Testimonials
-            </a>
-            <a href="#contact" className={activeSection === "contact" ? "text-indigo-600" : "text-gray-700"}>
-              Contact
-            </a>
-            <a href="/stickers" className="text-gray-700 hover:text-indigo-500">
-              Stickers
-            </a>
-          </div>
+  </div>
+</motion.nav>
 
-          {/* Cart Button */}
-          <motion.button
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.98 }}
-            className="ml-4 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white px-5 py-2 rounded-full font-medium shadow-lg shadow-indigo-200"
-          >
-            Cart
-          </motion.button>
-        </div>
-      </motion.nav>
 
       {/* HERO */}
       <section id="hero" className="relative min-h-[70vh] flex items-center justify-center overflow-hidden px-6">
