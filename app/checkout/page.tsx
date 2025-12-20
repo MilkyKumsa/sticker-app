@@ -15,9 +15,9 @@ interface CartItem {
 }
 
 const sizePricing: Record<string, number> = {
-  "Small (5 cm)": 40,
-  "Medium (8 cm)": 60,
-  "Large (12 cm)": 100,
+  "Small (5 cm)": 15,
+  "Medium (8 cm)": 35,
+  "Large (12 cm)": 40,
 };
 
 const MIN_ORDER_QTY = 5;
