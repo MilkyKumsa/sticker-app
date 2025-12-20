@@ -163,62 +163,7 @@ export default function Home() {
       </section>
 
   
-     {/* Trusted Clients Section */}
-      <section className="bg-gray-50 py-12">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-2xl font-bold mb-6 text-center">
-            Trusted by Leading Clients
-          </h2>
 
-          <div className="overflow-hidden relative">
-            <div className="flex animate-slide gap-8 min-w-max">
-              {/* Logos repeated for seamless loop */}
-              {[
-                "/logos/client-a.png",
-                "/logos/client-b.png",
-                "/logos/client-c.png",
-                "/logos/client-d.png",
-                "/logos/client-e.png",
-                "/logos/client-f.png",
-                "/logos/client-g.png"
-              ]
-                .concat([
-                  "/logos/client-a.png",
-                  "/logos/client-b.png",
-                  "/logos/client-c.png",
-                  "/logos/client-d.png",
-                  "/logos/client-e.png",
-                  "/logos/client-f.png",
-                ])
-                .map((logo, idx) => (
-                  <div key={idx} className="w-32 h-16 relative flex-shrink-0">
-                    <Image
-                      src={logo}
-                      alt={`Client ${idx + 1}`}
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                ))}
-            </div>
-          </div>
-        </div>
-
-        <style jsx>{`
-          @keyframes slide {
-            0% {
-              transform: translateX(0);
-            }
-            100% {
-              transform: translateX(-50%);
-            }
-          }
-          .animate-slide {
-            display: flex;
-            animation: slide 20s linear infinite;
-          }
-        `}</style>
-      </section>
 
       {/* PRICING */}
       <section
@@ -237,21 +182,21 @@ export default function Home() {
             {
               name: "Small Pack",
               desc: "Perfect for small orders",
-              price: "40 ETB",
-              perks: ["15x15 cm Stickers", "Matte or Glossy", "High-quality print"],
+              price: "14.99 ETB",
+              perks: ["4x4 cm Stickers", "Matte or Glossy", "High-quality print"],
             },
             {
               name: "Standard Pack",
               desc: "Our most loved tier",
-              price: "60 ETB",
-              perks: ["30x30 cm Stickers", "Matte or Glossy", "Custom sizes available"],
+              price: "34.99 ETB",
+              perks: ["6x6 cm Stickers", "Matte or Glossy", "Custom sizes available"],
               featured: true,
             },
             {
               name: "Large Pack",
               desc: "For serious sticker drops",
-              price: "100 ETB",
-              perks: ["50x50 cm Stickers", "Matte, Glossy, or Transparent", "Priority printing"],
+              price: "39.99 ETB",
+              perks: ["9x9 cm Stickers", "Matte, Glossy, or Transparent", "Priority printing"],
             },
           ].map((plan) => (
             <div
@@ -264,7 +209,7 @@ export default function Home() {
             >
               {plan.featured && (
                 <span className="absolute -top-3 right-8 rounded-full bg-indigo-500 px-4 py-1 text-xs font-semibold text-white">
-                  Best Value
+                  Recommended
                 </span>
               )}
               <h3 className="text-2xl font-bold text-indigo-700">{plan.name}</h3>
@@ -275,12 +220,7 @@ export default function Home() {
                   <li key={perk}>✔ {perk}</li>
                 ))}
               </ul>
-              <a
-                href="#contact"
-                className="block rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 py-3 text-center font-semibold text-white shadow-indigo-200"
-              >
-                Order Now
-              </a>
+
             </div>
           ))}
         </div>
@@ -297,20 +237,20 @@ export default function Home() {
       {
         name: "Michael Abebe",
         role: "CEO, EthioMart",
-        text: "stickerbet completely transformed our brand identity and digital presence. Their creativity and strategic approach delivered exceptional results.",
+        text: "stickerbet completely transformed our brand identity. Their creativity and strategic approach delivered exceptional results.",
         avatar: "/avatars/avatar3.jpg",
       },
       {
         name: "Helen Getachew",
-        role: "Marketing Director, Selam Bank",
+        role: "Marketing Director, Abeba Bank",
         text: "Top-notch stickers and outstanding customer service.",
         avatar: "/avatars/avatar2.jpg",
       },
       {
         name: "Dawit Lemma",
-        role: "Founder, TechFlow",
+        role: "Founder, ETFlow",
         text: "Exceptional results and creative flair! They turned our vision into reality with stunning designs",
-        avatar: "/avatars/avatar3.jpg",
+        avatar: "/avatars/avatar1.jpg",
       },
     ].map((t) => (
       <div

@@ -2,7 +2,7 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 
 export const metadata = {
-  title: "WeSticker",
+  title: "Stickerbet",
   description: "Your favorite custom sticker shop!",
   icons: {
     icon: "/dog.jpg",
