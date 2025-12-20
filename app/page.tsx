@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { FaInstagram, FaTwitter, FaLinkedin, FaFacebook } from "react-icons/fa";
+import { SiTiktok } from "react-icons/si";
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("hero");
@@ -140,31 +142,41 @@ export default function Home() {
         </div>
       </section>
 
-      {/* HOW TO ORDER */}
-      <section id="how" className="py-20 px-6 md:px-10">
-        <div className="mx-auto max-w-5xl glass-panel px-10 py-14 text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-indigo-400">Process</p>
-          <h2 className="text-4xl font-bold text-indigo-700 mt-3 mb-10">How to Order</h2>
-          <div className="grid gap-10 md:grid-cols-4 text-left">
-            {[
-              { title: "Browse", desc: "Explore curated packs across multiple categories" },
-              { title: "Select", desc: "Tap + on your favorites and pick your perfect size." },
-              { title: "Confirm", desc: "Proceed to checkout page and confirm sticker choices with quantity." },
-              { title: "Submit", desc: "Fill in your name and your phone and submit. Done! you'll be contacted shortly." },
-            ].map((step, idx) => (
-              <div key={idx} className="rounded-2xl border border-white/70 bg-white/70 p-5 shadow-sm">
-                <span className="text-sm font-semibold text-indigo-500">0{idx + 1}</span>
-                <h3 className="mt-2 text-xl font-semibold text-slate-900">{step.title}</h3>
-                <p className="mt-2 text-sm text-slate-500">{step.desc}</p>
-              </div>
-            ))}
-          </div>
+{/* HOW TO ORDER */}
+<section id="how" className="py-20 px-6 md:px-10">
+  <div className="mx-auto max-w-5xl glass-panel px-10 py-14 text-center">
+    <p className="text-xs uppercase tracking-[0.3em] text-indigo-400">Process</p>
+    <h2 className="text-4xl font-bold text-indigo-700 mt-3 mb-10">How to Order</h2>
+    <div className="grid gap-10 md:grid-cols-4 text-left">
+      {[
+        { title: "Browse", desc: "Explore curated packs across multiple categories" },
+        { title: "Select", desc: "Tap + on your favorites and pick your perfect size." },
+        { title: "Confirm", desc: "Proceed to checkout page and confirm sticker choices with quantity." },
+        { title: "Submit", desc: "Fill in your name and your phone and submit. Done! you'll be contacted shortly." },
+      ].map((step, idx) => (
+        <div key={idx} className="rounded-2xl border border-white/70 bg-white/70 p-5 shadow-sm">
+          <span className="text-sm font-semibold text-indigo-500">0{idx + 1}</span>
+          <h3 className="mt-2 text-xl font-semibold text-slate-900">{step.title}</h3>
+          <p className="mt-2 text-sm text-slate-500">{step.desc}</p>
         </div>
-      </section>
+      ))}
+    </div>
+
+    {/* BROWSE STICKERS BUTTON */}
+    <div className="mt-12">
+      <a
+        href="/stickers"
+        className="inline-block bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white px-8 py-3 rounded-full font-bold shadow transition-transform transform hover:scale-105"
+      >
+        Browse and Order Stickers Now!
+      </a>
+    </div>
+  </div>
+</section>
+
+
 
   
-
-
       {/* PRICING */}
       <section
         id="pricing"
@@ -182,20 +194,20 @@ export default function Home() {
             {
               name: "Small Pack",
               desc: "Perfect for small orders",
-              price: "14.99 ETB",
+              price: "15 ETB",
               perks: ["4x4 cm Stickers", "Matte or Glossy", "High-quality print"],
             },
             {
               name: "Standard Pack",
               desc: "Our most loved tier",
-              price: "34.99 ETB",
+              price: "35 ETB",
               perks: ["6x6 cm Stickers", "Matte or Glossy", "Custom sizes available"],
               featured: true,
             },
             {
               name: "Large Pack",
               desc: "For serious sticker drops",
-              price: "39.99 ETB",
+              price: "40 ETB",
               perks: ["9x9 cm Stickers", "Matte, Glossy, or Transparent", "Priority printing"],
             },
           ].map((plan) => (
@@ -276,79 +288,141 @@ export default function Home() {
 </section>
 
 
-      {/* CONTACT US */}
-      <section id="contact" className="py-24 px-6 text-center">
-        <div className="mx-auto max-w-4xl mb-12">
-          <p className="text-xs uppercase tracking-[0.3em] text-indigo-400">Say Hello</p>
-          <h2 className="text-4xl font-bold text-indigo-700 mt-3 mb-6">Contact Us</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto mb-12">
-            Need a custom illustration pack, rush order, or wholesale collaboration? Drop us a note and we will reach you
-            within 24 hours.
-          </p>
+{/* CONTACT US */}
+<section id="contact" className="py-24 px-6 text-center">
+  <div className="mx-auto max-w-4xl mb-12">
+    <p className="text-xs uppercase tracking-[0.3em] text-indigo-400">
+      Say Hello
+    </p>
 
-          <form
-            className="max-w-xl mx-auto glass-panel space-y-5 p-8"
-            onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
-              e.preventDefault();
-              const form = e.currentTarget;
-              const nameInput = form.elements.namedItem("name") as HTMLInputElement;
-              const emailInput = form.elements.namedItem("email") as HTMLInputElement;
-              const messageInput = form.elements.namedItem("message") as HTMLTextAreaElement;
+    <h2 className="text-4xl font-bold text-indigo-700 mt-3 mb-6">
+      Contact Us
+    </h2>
 
-              const data = {
-                name: nameInput.value,
-                email: emailInput.value,
-                message: messageInput.value,
-              };
+    <p className="text-gray-600 max-w-2xl mx-auto mb-8">
+      Need a custom illustration pack, rush order, or wholesale collaboration?
+      Drop us a note and we will reach you within 24 hours.
+    </p>
 
-              try {
-                const res = await fetch("/api/contact", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(data),
-                });
+    {/* SOCIAL MEDIA ICONS */}
+    <div className="flex justify-center gap-8 mb-12">
+      {/* Instagram */}
+      <a
+        href="https://instagram.com/yourpage"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Instagram"
+        className="transition transform hover:scale-125"
+      >
+        <FaInstagram size={34} className="text-[#E1306C]" />
+      </a>
 
-                if (res.ok) {
-                  alert("Message sent successfully!");
-                  form.reset();
-                } else {
-                  alert("Failed to send message. Please try again later.");
-                }
-              } catch (err) {
-                alert("Error sending message. Please try again later.");
-                console.error(err);
-              }
-            }}
-          >
-            <input
-              name="name"
-              type="text"
-              placeholder="Your Name"
-              className="w-full border-2 border-indigo-400 p-3 rounded-lg bg-white focus:ring-2 focus:ring-indigo-400"
-              required
-            />
-            <input
-              name="email"
-              type="email"
-              placeholder="Your Email"
-              className="w-full border-2 border-indigo-400 p-3 rounded-lg bg-white focus:ring-2 focus:ring-indigo-400"
-              required
-            />
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              className="w-full border-2 border-indigo-400 p-3 rounded-lg h-32 resize-none bg-white focus:ring-2 focus:ring-indigo-400"
-              required
-            />
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white py-3 rounded-xl text-lg font-semibold shadow-lg shadow-indigo-200 transition"
-            >
-              Send Message
-            </button>
-          </form>
-        </div>
-      </section>
+      {/* Twitter / X */}
+      <a
+        href="https://twitter.com/yourpage"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Twitter"
+        className="transition transform hover:scale-125"
+      >
+        <FaTwitter size={34} className="text-[#1DA1F2]" />
+      </a>
+
+      {/* TikTok */}
+      <a
+       href="https://tiktok.com/@yourpage"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="TikTok"
+       className="transition transform hover:scale-125"
+      >
+  <SiTiktok size={34} className="text-black" />
+      </a>
+
+      {/* Facebook */}
+      <a
+        href="https://facebook.com/yourpage"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Facebook"
+        className="transition transform hover:scale-125"
+      >
+        <FaFacebook size={34} className="text-[#1877F2]" />
+      </a>
+    </div>
+
+    {/* CONTACT FORM */}
+    <form
+      className="max-w-xl mx-auto glass-panel space-y-5 p-8"
+      onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const form = e.currentTarget;
+        const nameInput = form.elements.namedItem("name") as HTMLInputElement;
+        const emailInput = form.elements.namedItem("email") as HTMLInputElement;
+        const messageInput = form.elements.namedItem(
+          "message"
+        ) as HTMLTextAreaElement;
+
+        const data = {
+          name: nameInput.value,
+          email: emailInput.value,
+          message: messageInput.value,
+        };
+
+        try {
+          const res = await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+
+          if (res.ok) {
+            alert("Message sent successfully!");
+            form.reset();
+          } else {
+            alert("Failed to send message. Please try again later.");
+          }
+        } catch (err) {
+          alert("Error sending message. Please try again later.");
+          console.error(err);
+        }
+      }}
+    >
+      <input
+        name="name"
+        type="text"
+        placeholder="Your Name"
+        required
+        className="w-full border-2 border-indigo-400 p-3 rounded-lg bg-white focus:ring-2 focus:ring-indigo-400"
+      />
+
+      <input
+        name="email"
+        type="email"
+        placeholder="Your Email"
+        required
+        className="w-full border-2 border-indigo-400 p-3 rounded-lg bg-white focus:ring-2 focus:ring-indigo-400"
+      />
+
+      <textarea
+        name="message"
+        placeholder="Your Message"
+        required
+        className="w-full border-2 border-indigo-400 p-3 rounded-lg h-32 resize-none bg-white focus:ring-2 focus:ring-indigo-400"
+      />
+
+      <button
+        type="submit"
+        className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white py-3 rounded-xl text-lg font-semibold shadow-lg shadow-indigo-200 transition"
+      >
+        Send Message
+      </button>
+    </form>
+  </div>
+</section>
+
+
     </main>
   );
 }

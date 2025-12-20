@@ -26,11 +26,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="relative z-10">{children}</main>
           <footer className="relative z-10 mt-16 border-t border-indigo-100 bg-white/80 backdrop-blur-sm">
             <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-6 py-10 text-sm text-gray-500 md:flex-row md:justify-between">
-              <p>© {new Date().getFullYear()} Stickify — Crafted with care.</p>
+              <p>© {new Date().getFullYear()} Stickerbet — Crafted with care.</p>
               <div className="flex gap-4 text-xs uppercase tracking-[0.2em] text-gray-400">
-                <span>Custom Prints</span>
-                <span>Eco Inks</span>
-                <span>Worldwide</span>
+
               </div>
             </div>
           </footer>
