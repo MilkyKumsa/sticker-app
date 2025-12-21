@@ -3,9 +3,9 @@
 import { useState } from "react";
 
 const sizePricing: Record<string, number> = {
-  Small: 40,
-  Medium: 60,
-  Large: 100,
+  Small: 15,
+  Medium: 35,
+  Large: 40,
 };
 
 export default function CustomOrderPage() {

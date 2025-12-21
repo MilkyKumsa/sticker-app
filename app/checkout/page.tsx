@@ -10,16 +10,17 @@ interface CartItem {
   title: string;
   category: string;
   image: string;
-  size?: string;
+  size: string;
   quantity: number;
 }
 
 const sizePricing: Record<string, number> = {
-  "Small (5 cm)": 15,
-  "Medium (8 cm)": 35,
-  "Large (12 cm)": 40,
+  "Small (4 cm)": 15,
+  "Medium (6 cm)": 35,
+  "Large (9 cm)": 40,
 };
 
+const DEFAULT_SIZE = "Small (4 cm)";
 const MIN_ORDER_QTY = 5;
 
 export default function CheckoutPage() {
@@ -28,20 +29,31 @@ export default function CheckoutPage() {
   const [formData, setFormData] = useState({ name: "", phone: "" });
   const [loading, setLoading] = useState(false);
 
+  /* -------------------------------------------
+     LOAD & NORMALIZE CART
+  -------------------------------------------- */
   useEffect(() => {
     const saved = localStorage.getItem("stickersCart");
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        // Ensure quantity exists
-        const normalized = parsed.map((item: any) => ({
-          ...item,
-          quantity: item.quantity ?? 1,
-        }));
-        setItems(normalized);
-      } catch (e) {
-        console.error("Failed to parse cart", e);
-      }
+    if (!saved) return;
+
+    try {
+      const parsed = JSON.parse(saved);
+
+      const normalized: CartItem[] = parsed.map((item: any) => ({
+        id: item.id,
+        title: item.title,
+        category: item.category,
+        image: item.image,
+        quantity: item.quantity ?? 1,
+        size:
+          item.size && sizePricing[item.size]
+            ? item.size
+            : DEFAULT_SIZE,
+      }));
+
+      setItems(normalized);
+    } catch (e) {
+      console.error("Failed to parse cart", e);
     }
   }, []);
 
@@ -50,38 +62,43 @@ export default function CheckoutPage() {
     localStorage.setItem("stickersCart", JSON.stringify(next));
   };
 
+  /* -------------------------------------------
+     TOTALS
+  -------------------------------------------- */
   const totalQuantity = useMemo(
-    () => items.reduce((sum, item) => sum + item.quantity, 0),
+    () => items.reduce((sum, i) => sum + i.quantity, 0),
     [items]
   );
 
   const totalPrice = useMemo(
     () =>
-      items.reduce((sum, item) => {
-        const price = item.size ? sizePricing[item.size] ?? 0 : 0;
-        return sum + price * item.quantity;
-      }, 0),
+      items.reduce(
+        (sum, i) => sum + sizePricing[i.size] * i.quantity,
+        0
+      ),
     [items]
   );
 
-  const removeItem = (id: number) => {
-    const next = items.filter((item) => item.id !== id);
-    saveCart(next);
-  };
-
+  /* -------------------------------------------
+     CART ACTIONS
+  -------------------------------------------- */
   const updateQuantity = (id: number, delta: number) => {
-    const next = items.map((item) =>
-      item.id === id
-        ? { ...item, quantity: Math.max(1, item.quantity + delta) }
-        : item
+    saveCart(
+      items.map((i) =>
+        i.id === id
+          ? { ...i, quantity: Math.max(1, i.quantity + delta) }
+          : i
+      )
     );
-    saveCart(next);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const removeItem = (id: number) => {
+    saveCart(items.filter((i) => i.id !== id));
   };
 
+  /* -------------------------------------------
+     FORM
+  -------------------------------------------- */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -92,13 +109,12 @@ export default function CheckoutPage() {
       return;
     }
 
-    const orderItems = items.map((item) => ({
-      sticker: item.title,
-      size: item.size ?? "Not selected",
-      quantity: item.quantity,
-      unitPrice: item.size ? sizePricing[item.size] ?? 0 : 0,
-      totalPrice:
-        (item.size ? sizePricing[item.size] ?? 0 : 0) * item.quantity,
+    const orderItems = items.map((i) => ({
+      sticker: i.title,
+      size: i.size,
+      quantity: i.quantity,
+      unitPrice: sizePricing[i.size],
+      totalPrice: sizePricing[i.size] * i.quantity,
     }));
 
     try {
@@ -114,8 +130,7 @@ export default function CheckoutPage() {
         }),
       });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to send order");
+      if (!res.ok) throw new Error("Order failed");
     } catch (err: any) {
       alert(err.message);
       setLoading(false);
@@ -130,26 +145,25 @@ export default function CheckoutPage() {
     setLoading(false);
   };
 
+  /* -------------------------------------------
+     UI
+  -------------------------------------------- */
   return (
     <main className="min-h-screen bg-gray-50 pt-24 px-6">
       <div className="max-w-5xl mx-auto">
         <div className="flex justify-between mb-8">
           <h1 className="text-3xl font-bold text-indigo-700">Checkout</h1>
-          <Link href="/stickers" className="text-indigo-600">
-            ← Back
-          </Link>
+          <Link href="/stickers" className="text-indigo-600">← Back</Link>
         </div>
 
         {items.length === 0 ? (
           <p className="text-center text-gray-500">Your cart is empty</p>
         ) : (
           <div className="grid lg:grid-cols-3 gap-6">
-            {/* Cart Items */}
+            {/* ITEMS */}
             <section className="lg:col-span-2 bg-white p-6 rounded-xl space-y-4">
               {items.map((item) => {
-                const unitPrice = item.size
-                  ? sizePricing[item.size] ?? 0
-                  : 0;
+                const unitPrice = sizePricing[item.size];
 
                 return (
                   <motion.div
@@ -170,8 +184,10 @@ export default function CheckoutPage() {
                     <div className="flex-1">
                       <p className="font-semibold">{item.title}</p>
                       <p className="text-sm text-gray-500">{item.size}</p>
+                      <p className="text-sm text-gray-500">
+                        {unitPrice} ETB × {item.quantity}
+                      </p>
 
-                      {/* Quantity Controls */}
                       <div className="flex items-center gap-3 mt-2">
                         <button
                           onClick={() => updateQuantity(item.id, -1)}
@@ -179,9 +195,7 @@ export default function CheckoutPage() {
                         >
                           −
                         </button>
-                        <span className="font-semibold">
-                          {item.quantity}
-                        </span>
+                        <span className="font-semibold">{item.quantity}</span>
                         <button
                           onClick={() => updateQuantity(item.id, 1)}
                           className="w-8 h-8 rounded bg-gray-200"
@@ -197,7 +211,7 @@ export default function CheckoutPage() {
                       </p>
                       <button
                         onClick={() => removeItem(item.id)}
-                        className="text-xs text-red-500 hover:underline"
+                        className="text-xs text-red-500"
                       >
                         Remove
                       </button>
@@ -207,7 +221,7 @@ export default function CheckoutPage() {
               })}
             </section>
 
-            {/* Summary */}
+            {/* SUMMARY */}
             <section className="bg-white p-6 rounded-xl">
               <h2 className="text-xl font-bold mb-4">Summary</h2>
 
@@ -221,21 +235,8 @@ export default function CheckoutPage() {
                 <span>{totalPrice} ETB</span>
               </div>
 
-              {totalQuantity < MIN_ORDER_QTY && (
-                <p className="text-sm text-red-500 mt-3">
-                  Minimum order is {MIN_ORDER_QTY} stickers (
-                  {MIN_ORDER_QTY - totalQuantity} more needed)
-                </p>
-              )}
-
               <button
-                onClick={() => {
-                  if (totalQuantity < MIN_ORDER_QTY) {
-                    alert(`Minimum order is ${MIN_ORDER_QTY} stickers.`);
-                    return;
-                  }
-                  setShowForm(true);
-                }}
+                onClick={() => setShowForm(true)}
                 className="mt-6 w-full bg-indigo-500 text-white py-3 rounded-xl"
               >
                 Place Order
@@ -245,7 +246,7 @@ export default function CheckoutPage() {
         )}
       </div>
 
-      {/* Modal */}
+      {/* MODAL */}
       {showForm && (
         <div className="fixed inset-0 bg-black/30 flex items-center justify-center">
           <form
@@ -259,7 +260,9 @@ export default function CheckoutPage() {
               placeholder="Name"
               required
               value={formData.name}
-              onChange={handleChange}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
               className="w-full border p-2 mb-3 rounded"
             />
 
@@ -268,7 +271,9 @@ export default function CheckoutPage() {
               placeholder="Phone"
               required
               value={formData.phone}
-              onChange={handleChange}
+              onChange={(e) =>
+                setFormData({ ...formData, phone: e.target.value })
+              }
               className="w-full border p-2 mb-4 rounded"
             />
 

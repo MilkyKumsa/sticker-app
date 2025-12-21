@@ -255,19 +255,19 @@
                                 className="block w-full text-left px-2 py-1 hover:bg-indigo-50 rounded"
                                 onClick={() => addToCartWithSize(sticker, "Small (5cm)")}
                               >
-                                Small (5 cm)
+                                Small (4 cm)
                               </button>
                               <button
                                 className="block w-full text-left px-2 py-1 hover:bg-indigo-50 rounded"
                                 onClick={() => addToCartWithSize(sticker, "Medium (8cm)")}
                               >
-                                Medium (8 cm)
+                                Medium (6 cm)
                               </button>
                               <button
                                 className="block w-full text-left px-2 py-1 hover:bg-indigo-50 rounded"
                                 onClick={() => addToCartWithSize(sticker, "Large (12cm)")}
                               >
-                                Large (12 cm)
+                                Large (9 cm)
                               </button>
                             </motion.div>
                           )}
