@@ -171,6 +171,7 @@
     return (
       <main className="relative min-h-screen bg-transparent text-gray-800 scroll-smooth pt-24">
         {/* NAVBAR */}
+        
         <motion.nav
           initial={{ y: -60, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -182,8 +183,16 @@
           }`}
         >
           <div className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center h-16">
-            <div className="flex items-center gap-3">
-              <Image src="/animal/animal_5.jpg" alt="Logo" width={40} height={40} className="rounded-full" />
+            
+                {/* Logo */}
+                <div className="flex items-center gap-3">
+                  <Image
+                    src="/animal/favicon.ico"
+                    alt="Logo"
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                  />
               <h1 className="text-2xl font-extrabold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
                 StickerBet
               </h1>
