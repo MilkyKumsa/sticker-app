@@ -261,64 +261,101 @@ export default function StickersPage() {
           return (
             <section key={cat} id={cat} className="mb-16">
               <h2 className="text-3xl font-bold text-indigo-600 mb-8">{cat}</h2>
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
-                {visibleStickers.map((sticker) => {
-                  const inCart = cart.some((s) => s.id === sticker.id);
-                  return (
-                    <div key={sticker.id} className="relative aspect-square bg-gray-50 rounded-xl overflow-hidden group">
-                      <Image
-                        src={sticker.image}
-                        alt={sticker.title}
-                        fill
-                        className="object-contain p-4 transition-transform group-hover:scale-110"
-                      />
-                      <button
-                        onClick={() => {
-                          if (inCart) removeFromCart(sticker.id);
-                          else setShowSizeMenu(sticker.id);
-                        }}
-                        className={`absolute top-2 right-2 w-9 h-9 rounded-full flex items-center justify-center shadow-lg text-white font-bold text-lg transition ${
-                          inCart
-                            ? "bg-red-500 hover:bg-red-600"
-                            : "bg-gradient-to-br from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600"
-                        }`}
-                      >
-                        {inCart ? "×" : "+"}
-                      </button>
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4"> 
+                 {visibleStickers.map((sticker) => {
+  const inCart = cart.some((s) => s.id === sticker.id);
+  return (
+    <div
+      key={sticker.id}
+      className="relative aspect-square bg-gray-50 rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-shadow"
+    >
+      <Image
+        src={sticker.image}
+        alt={sticker.title}
+        fill
+        className="object-contain p-6 transition-transform group-hover:scale-105"
+      />
 
-                      {/* Size Selection Menu */}
-                      <AnimatePresence>
-                        {showSizeMenu === sticker.id && !inCart && (
-                          <motion.div
-                            initial={{ opacity: 0, scale: 0.95, y: -10 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                            className="absolute top-12 right-2 bg-white rounded-xl shadow-2xl border border-gray-200 py-2 w-40 z-30"
-                          >
-                            <button
-                              onClick={() => addToCartWithSize(sticker, "Small (4cm)")}
-                              className="block w-full text-left px-4 py-2 hover:bg-indigo-50 text-sm"
-                            >
-                              Small (4 cm)
-                            </button>
-                            <button
-                              onClick={() => addToCartWithSize(sticker, "Medium (6cm)")}
-                              className="block w-full text-left px-4 py-2 hover:bg-indigo-50 text-sm"
-                            >
-                              Medium (6 cm)
-                            </button>
-                            <button
-                              onClick={() => addToCartWithSize(sticker, "Large (9cm)")}
-                              className="block w-full text-left px-4 py-2 hover:bg-indigo-50 text-sm"
-                            >
-                              Large (9 cm)
-                            </button>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                })}
+      {/* Add/Remove Button - Small and neat */}
+      <button
+        onClick={() => {
+          if (inCart) {
+            removeFromCart(sticker.id);
+          } else {
+            setShowSizeMenu(sticker.id);
+          }
+        }}
+        className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center shadow-lg text-white font-bold text-lg transition-all z-10 ${
+          inCart
+            ? "bg-red-500 hover:bg-red-600"
+            : "bg-gradient-to-br from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600"
+        }`}
+      >
+        {inCart ? "×" : "+"}
+      </button>
+    </div>
+  );
+})}
+
+{/* Size Menu Portal - Rendered once, outside the grid */}
+<AnimatePresence>
+  {showSizeMenu !== null && (
+    <>
+      {/* Backdrop to close menu */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.4 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 bg-black z-40"
+        onClick={() => setShowSizeMenu(null)}
+      />
+
+      {/* Find the selected sticker to position the menu near it */}
+      {(() => {
+        const selectedSticker = stickers.find((s) => s.id === showSizeMenu);
+        if (!selectedSticker) return null;
+
+        return (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: -10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: -10 }}
+            transition={{ duration: 0.15 }}
+            className="fixed bg-white rounded-xl shadow-2xl border border-gray-200 py-3 px-2 w-40 z-50"
+            style={{
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+            // Centered on mobile/small screens, adjust if you want near-button positioning
+          >
+            <div className="px-4 py-2 text-center text-sm font-medium text-gray-700 mb-2">
+              Select Size
+            </div>
+            <button
+              onClick={() => addToCartWithSize(selectedSticker, "Small (4cm)")}
+              className="block w-full text-left px-4 py-2.5 hover:bg-indigo-50 text-sm font-medium rounded-lg transition"
+            >
+              Small (4 cm)
+            </button>
+            <button
+              onClick={() => addToCartWithSize(selectedSticker, "Medium (6cm)")}
+              className="block w-full text-left px-4 py-2.5 hover:bg-indigo-50 text-sm font-medium rounded-lg transition"
+            >
+              Medium (6 cm)
+            </button>
+            <button
+              onClick={() => addToCartWithSize(selectedSticker, "Large (9cm)")}
+              className="block w-full text-left px-4 py-2.5 hover:bg-indigo-50 text-sm font-medium rounded-lg transition"
+            >
+              Large (9 cm)
+            </button>
+          </motion.div>
+        );
+      })()}
+    </>
+  )}
+</AnimatePresence>
               </div>
 
               {hasMore && (
