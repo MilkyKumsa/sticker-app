@@ -65,82 +65,120 @@ export default function StickersPage() {
     setMobileMenuOpen(false);
   };
 
-  const categories = ["Movies", "Spiritual", "Sports", "Tech", "Cool"];
+  const categories = ["Movies", "Spiritual", "Sports", "Tech", "Cool", "eth"];
 
   const stickers: Sticker[] = [
     // Movies
-    { id: 1, title: "spiderman", category: "Movies", image: "/Movies/movies1.jpg" },
-    { id: 2, title: "simpsons", category: "Movies", image: "/Movies/movies2.jpg" },
-    { id: 3, title: "friends-unagi", category: "Movies", image: "/Movies/movies3.jpg" },
-    { id: 4, title: "thats-my-spot", category: "Movies", image: "/Movies/movies4.jpg" },
-    { id: 5, title: "another-day-office", category: "Movies", image: "/Movies/movies5.jpg" },
-    { id: 6, title: "best-boss", category: "Movies", image: "/Movies/movies6.jpg" },
-    { id: 7, title: "big-bang", category: "Movies", image: "/Movies/movies7.jpg" },
-    { id: 8, title: "mic-scott", category: "Movies", image: "/Movies/movies8.jpg" },
-    { id: 9, title: "the-offce", category: "Movies", image: "/Movies/movies9.jpg" },
-    { id: 10, title: "dwight", category: "Movies", image: "/Movies/movies10.jpg" },
-    { id: 11, title: "friends", category: "Movies", image: "/Movies/movies11.jpg" },
-    { id: 12, title: "winter-coming", category: "Movies", image: "/Movies/movies12.jpg" },
-    { id: 13, title: "tom", category: "Movies", image: "/Movies/movies13.jpg" },
-    { id: 14, title: "arya-starks", category: "Movies", image: "/Movies/movies14.jpg" },
-    { id: 15, title: "jon-snow", category: "Movies", image: "/Movies/movies15.jpg" },
-    { id: 16, title: "jon-snow-back", category: "Movies", image: "/Movies/movies16.jpg" },
-    { id: 17, title: "joy-clothes", category: "Movies", image: "/Movies/movies17.jpg" },
-    { id: 18, title: "phoebe", category: "Movies", image: "/Movies/movies18.jpg" },
-    { id: 19, title: "walter", category: "Movies", image: "/Movies/movies19.jpg" },
-    { id: 20, title: "br-ba", category: "Movies", image: "/Movies/movies20.jpg" },
-    // Spiritual
-    { id: 21, title: "jesus-is-king", category: "Spiritual", image: "/spiritual/spiritual1.jpg" },
-    { id: 22, title: "cross", category: "Spiritual", image: "/spiritual/spiritual2.jpg" },
-    { id: 23, title: "lamb-99", category: "Spiritual", image: "/spiritual/spiritual3.jpg" },
-    { id: 24, title: "God-on-mountain-and-valley", category: "Spiritual", image: "/spiritual/spiritual4.jpg" },
-    { id: 25, title: "Zen 1", category: "Spiritual", image: "/spiritual/spiritual5.jpg" },
-    { id: 26, title: "Zen 2", category: "Spiritual", image: "/spiritual/spiritual6.jpg" },
-    { id: 27, title: "Chakra 1", category: "Spiritual", image: "/spiritual/spiritual7.jpg" },
-    { id: 28, title: "Chakra 2", category: "Spiritual", image: "/spiritual/spiritual8.jpg" },
-    { id: 29, title: "Mandala 1", category: "Spiritual", image: "/spiritual/spiritual9.jpg" },
-    { id: 30, title: "Mandala 2", category: "Spiritual", image: "/spiritual/spiritual10.jpg" },
-    { id: 31, title: "Prayer Beads 1", category: "Spiritual", image: "/spiritual/spiritual11.jpg" },
-    { id: 32, title: "Prayer Beads 2", category: "Spiritual", image: "/spiritual/spiritual12.jpg" },
-    { id: 33, title: "Prayer Beads 3", category: "Spiritual", image: "/spiritual/spiritual13.jpg" },
-    { id: 34, title: "Prayer Beads 4", category: "Spiritual", image: "/spiritual/spiritual14.jpg" },
-    { id: 35, title: "Prayer Beads 5", category: "Spiritual", image: "/spiritual/spiritual15.jpg" },
-    { id: 36, title: "Prayer Beads 6", category: "Spiritual", image: "/spiritual/spiritual16.jpg" },
-    // Sports
-    { id: 37, title: "Football 1", category: "Sports", image: "/sport/sports1.jpg" },
-    { id: 38, title: "Football 2", category: "Sports", image: "/sport/sports2.jpg" },
-    { id: 39, title: "Basketball 1", category: "Sports", image: "/sport/sports3.jpg" },
-    { id: 40, title: "Basketball 2", category: "Sports", image: "/sport/sports4.jpg" },
-    { id: 41, title: "Tennis 1", category: "Sports", image: "/sport/sports5.jpg" },
-    { id: 42, title: "Tennis 2", category: "Sports", image: "/sport/sports6.jpg" },
-    { id: 43, title: "Soccer 1", category: "Sports", image: "/sport/sports7.jpg" },
-    { id: 44, title: "Soccer 2", category: "Sports", image: "/sport/sports8.jpg" },
-    { id: 45, title: "Tennis 3", category: "Sports", image: "/sport/sports9.jpg" },
-    { id: 46, title: "Soccer 3", category: "Sports", image: "/sport/sports10.jpg" },
-    { id: 47, title: "Soccer 4", category: "Sports", image: "/sport/sports11.jpg" },
-    { id: 48, title: "Tennis 4", category: "Sports", image: "/sport/sports12.jpg" },
-    { id: 49, title: "Soccer 5", category: "Sports", image: "/sport/sports13.jpg" },
-    { id: 50, title: "Soccer 6", category: "Sports", image: "/sport/sports14.jpg" },
-    { id: 51, title: "Tennis 5", category: "Sports", image: "/sport/sports15.jpg" },
-    { id: 52, title: "Tennis 6", category: "Sports", image: "/sport/sports16.jpg" },
-    // Tech
-    { id: 53, title: "Tech 1", category: "Tech", image: "/tech/tech1.jpg" },
-    { id: 54, title: "Tech 2", category: "Tech", image: "/tech/tech2.jpg" },
-    { id: 55, title: "Tech 3", category: "Tech", image: "/tech/tech3.jpg" },
-    { id: 56, title: "Tech 4", category: "Tech", image: "/tech/tech4.jpg" },
-    { id: 57, title: "Tech 5", category: "Tech", image: "/tech/tech5.jpg" },
-    { id: 58, title: "Tech 6", category: "Tech", image: "/tech/tech6.jpg" },
-    { id: 59, title: "Tech 7", category: "Tech", image: "/tech/tech7.jpg" },
-    { id: 60, title: "Tech 8", category: "Tech", image: "/tech/tech8.jpg" },
-    { id: 61, title: "Tech 9", category: "Tech", image: "/tech/tech9.jpg" },
-    { id: 62, title: "Tech 10", category: "Tech", image: "/tech/tech10.jpg" },
-    { id: 63, title: "Tech 11", category: "Tech", image: "/tech/tech11.jpg" },
-    { id: 64, title: "Tech 12", category: "Tech", image: "/tech/tech12.jpg" },
-    { id: 65, title: "Tech 13", category: "Tech", image: "/tech/tech13.jpg" },
-    { id: 66, title: "Tech 14", category: "Tech", image: "/tech/tech14.jpg" },
-    { id: 67, title: "Tech 15", category: "Tech", image: "/tech/tech15.jpg" },
-    { id: 68, title: "Tech 16", category: "Tech", image: "/tech/tech16.jpg" },
-    { id: 69, title: "Tech 17", category: "Tech", image: "/tech/tech17.jpg" },
+// Movies
+{ id: 1, title: "spiderman", category: "Movies", image: "/Movies/movies1.jpg" },
+{ id: 2, title: "simpsons", category: "Movies", image: "/Movies/movies2.jpg" },
+{ id: 3, title: "friends-unagi", category: "Movies", image: "/Movies/movies3.jpg" },
+{ id: 4, title: "thats-my-spot", category: "Movies", image: "/Movies/movies4.jpg" },
+{ id: 5, title: "another-day-office", category: "Movies", image: "/Movies/movies5.jpg" },
+{ id: 6, title: "best-boss", category: "Movies", image: "/Movies/movies6.jpg" },
+{ id: 7, title: "big-bang", category: "Movies", image: "/Movies/movies7.jpg" },
+{ id: 8, title: "mic-scott", category: "Movies", image: "/Movies/movies8.jpg" },
+{ id: 9, title: "the-offce", category: "Movies", image: "/Movies/movies9.jpg" },
+{ id: 10, title: "dwight", category: "Movies", image: "/Movies/movies10.jpg" },
+{ id: 11, title: "friends", category: "Movies", image: "/Movies/movies11.jpg" },
+{ id: 12, title: "winter-coming", category: "Movies", image: "/Movies/movies12.jpg" },
+{ id: 13, title: "tom", category: "Movies", image: "/Movies/movies13.jpg" },
+{ id: 14, title: "arya-starks", category: "Movies", image: "/Movies/movies14.jpg" },
+{ id: 15, title: "jon-snow", category: "Movies", image: "/Movies/movies15.jpg" },
+{ id: 16, title: "jon-snow-back", category: "Movies", image: "/Movies/movies16.jpg" },
+{ id: 17, title: "joy-clothes", category: "Movies", image: "/Movies/movies17.jpg" },
+{ id: 18, title: "phoebe", category: "Movies", image: "/Movies/movies18.jpg" },
+{ id: 19, title: "walter", category: "Movies", image: "/Movies/movies19.jpg" },
+{ id: 20, title: "br-ba", category: "Movies", image: "/Movies/movies20.jpg" },
+
+// Spiritual
+{ id: 21, title: "jesus-is-king", category: "Spiritual", image: "/spiritual/spiritual1.jpg" },
+{ id: 22, title: "cross", category: "Spiritual", image: "/spiritual/spiritual2.jpg" },
+{ id: 23, title: "lamb-99", category: "Spiritual", image: "/spiritual/spiritual3.jpg" },
+{ id: 24, title: "God-on-mountain-and-valley", category: "Spiritual", image: "/spiritual/spiritual4.jpg" },
+{ id: 25, title: "am-with-u", category: "Spiritual", image: "/spiritual/spiritual5.jpg" },
+{ id: 26, title: "God-is-good", category: "Spiritual", image: "/spiritual/spiritual6.jpg" },
+{ id: 27, title: "light-of-the-world", category: "Spiritual", image: "/spiritual/spiritual7.jpg" },
+{ id: 28, title: "with-God-Possible", category: "Spiritual", image: "/spiritual/spiritual8.jpg" },
+{ id: 29, title: "Love-them", category: "Spiritual", image: "/spiritual/spiritual9.jpg" },
+{ id: 30, title: "behold", category: "Spiritual", image: "/spiritual/spiritual10.jpg" },
+{ id: 31, title: "faith", category: "Spiritual", image: "/spiritual/spiritual11.jpg" },
+{ id: 32, title: "God-detail", category: "Spiritual", image: "/spiritual/spiritual12.jpg" },
+{ id: 33, title: "philipiens", category: "Spiritual", image: "/spiritual/spiritual13.jpg" },
+{ id: 34, title: "chorintians", category: "Spiritual", image: "/spiritual/spiritual14.jpg" },
+{ id: 35, title: "all-things-new", category: "Spiritual", image: "/spiritual/spiritual15.jpg" },
+{ id: 36, title: "cross-red", category: "Spiritual", image: "/spiritual/spiritual16.jpg" },
+{ id: 37, title: "God-plan", category: "Spiritual", image: "/spiritual/spiritual17.jpg" },
+{ id: 38, title: "jesus-heals", category: "Spiritual", image: "/spiritual/spiritual18.jpg" },
+{ id: 39, title: "tetelestai", category: "Spiritual", image: "/spiritual/spiritual19.jpg" },
+{ id: 40, title: "jesus cloth", category: "Spiritual", image: "/spiritual/spiritual20.jpg" },
+
+// Sports
+{ id: 41, title: "Football 1", category: "Sports", image: "/sport/sports1.jpg" },
+{ id: 42, title: "Football 2", category: "Sports", image: "/sport/sports2.jpg" },
+{ id: 43, title: "Basketball 1", category: "Sports", image: "/sport/sports3.jpg" },
+{ id: 44, title: "Basketball 2", category: "Sports", image: "/sport/sports4.jpg" },
+{ id: 45, title: "Tennis 1", category: "Sports", image: "/sport/sports5.jpg" },
+{ id: 46, title: "Tennis 2", category: "Sports", image: "/sport/sports6.jpg" },
+{ id: 47, title: "Soccer 1", category: "Sports", image: "/sport/sports7.jpg" },
+{ id: 48, title: "Soccer 2", category: "Sports", image: "/sport/sports8.jpg" },
+{ id: 49, title: "Tennis 3", category: "Sports", image: "/sport/sports9.jpg" },
+{ id: 50, title: "Soccer 3", category: "Sports", image: "/sport/sports10.jpg" },
+{ id: 51, title: "Soccer 4", category: "Sports", image: "/sport/sports11.jpg" },
+{ id: 52, title: "Tennis 4", category: "Sports", image: "/sport/sports12.jpg" },
+{ id: 53, title: "Soccer 5", category: "Sports", image: "/sport/sports13.jpg" },
+{ id: 54, title: "Soccer 6", category: "Sports", image: "/sport/sports14.jpg" },
+{ id: 55, title: "Tennis 5", category: "Sports", image: "/sport/sports15.jpg" },
+{ id: 56, title: "Tennis 6", category: "Sports", image: "/sport/sports16.jpg" },
+
+// Tech
+{ id: 57, title: "Tech 1", category: "Tech", image: "/tech/tech1.jpg" },
+{ id: 58, title: "Tech 2", category: "Tech", image: "/tech/tech2.jpg" },
+{ id: 59, title: "Tech 3", category: "Tech", image: "/tech/tech3.jpg" },
+{ id: 60, title: "Tech 4", category: "Tech", image: "/tech/tech4.jpg" },
+{ id: 61, title: "Tech 5", category: "Tech", image: "/tech/tech5.jpg" },
+{ id: 62, title: "Tech 6", category: "Tech", image: "/tech/tech6.jpg" },
+{ id: 63, title: "Tech 7", category: "Tech", image: "/tech/tech7.jpg" },
+{ id: 64, title: "Tech 8", category: "Tech", image: "/tech/tech8.jpg" },
+{ id: 65, title: "Tech 9", category: "Tech", image: "/tech/tech9.jpg" },
+{ id: 66, title: "Tech 10", category: "Tech", image: "/tech/tech10.jpg" },
+{ id: 67, title: "Tech 11", category: "Tech", image: "/tech/tech11.jpg" },
+{ id: 68, title: "Tech 12", category: "Tech", image: "/tech/tech12.jpg" },
+{ id: 69, title: "Tech 13", category: "Tech", image: "/tech/tech13.jpg" },
+{ id: 70, title: "Tech 14", category: "Tech", image: "/tech/tech14.jpg" },
+{ id: 71, title: "Tech 15", category: "Tech", image: "/tech/tech15.jpg" },
+{ id: 72, title: "Tech 16", category: "Tech", image: "/tech/tech16.jpg" },
+{ id: 73, title: "Tech 17", category: "Tech", image: "/tech/tech17.jpg" },
+{ id: 74, title: "Tech 18", category: "Tech", image: "/tech/tech18.jpg" },
+{ id: 75, title: "Tech 19", category: "Tech", image: "/tech/tech19.jpg" },
+{ id: 76, title: "Tech 20", category: "Tech", image: "/tech/tech20.jpg" },
+{ id: 77, title: "Tech 21", category: "Tech", image: "/tech/tech21.jpg" },
+{ id: 78, title: "Tech 22", category: "Tech", image: "/tech/tech22.jpg" },
+{ id: 79, title: "Tech 23", category: "Tech", image: "/tech/tech23.jpg" },
+
+// Ethiopia
+{ id: 80, title: "gobez", category: "eth", image: "/eth/eth1.jpg" },
+{ id: 81, title: "eth 2", category: "eth", image: "/eth/eth2.jpg" },
+{ id: 82, title: "eth 3", category: "eth", image: "/eth/eth3.jpg" },
+{ id: 83, title: "eth 4", category: "eth", image: "/eth/eth4.jpg" },
+{ id: 84, title: "eth 5", category: "eth", image: "/eth/eth5.jpg" },
+{ id: 85, title: "eth 6", category: "eth", image: "/eth/eth6.jpg" },
+{ id: 86, title: "eth 7", category: "eth", image: "/eth/eth7.jpg" },
+{ id: 87, title: "eth 8", category: "eth", image: "/eth/eth8.jpg" },
+{ id: 88, title: "eth 9", category: "eth", image: "/eth/eth9.jpg" },
+{ id: 89, title: "eth 10", category: "eth", image: "/eth/eth10.jpg" },
+{ id: 90, title: "eth 11", category: "eth", image: "/eth/eth11.jpg" },
+{ id: 91, title: "eth 12", category: "eth", image: "/eth/eth12.jpg" },
+{ id: 92, title: "eth 13", category: "eth", image: "/eth/eth13.jpg" },
+{ id: 93, title: "eth 14", category: "eth", image: "/eth/eth14.jpg" },
+{ id: 94, title: "eth 15", category: "eth", image: "/eth/eth15.jpg" },
+{ id: 95, title: "eth 16", category: "eth", image: "/eth/eth16.jpg" },
+{ id: 96, title: "eth 17", category: "eth", image: "/eth/eth17.jpg" },
+{ id: 97, title: "eth 18", category: "eth", image: "/eth/eth18.jpg" },
+{ id: 98, title: "eth 19", category: "eth", image: "/eth/eth19.jpg" },
+{ id: 99, title: "eth 20", category: "eth", image: "/eth/eth20.jpg" },
+{ id: 100, title: "eth 21", category: "eth", image: "/eth/eth21.jpg" },
+
   ];
 
   useEffect(() => {
@@ -339,7 +377,8 @@ export default function StickersPage() {
               onClick={() => addToCartWithSize(selectedSticker, "Medium (6cm)")}
               className="block w-full text-left px-4 py-2.5 hover:bg-indigo-50 text-sm font-medium rounded-lg transition"
             >
-              Medium (6cm)
+              Medium 
+              (6cm)
             </button>
             <button
               onClick={() => addToCartWithSize(selectedSticker, "Large (9cm)")}
@@ -363,7 +402,7 @@ export default function StickersPage() {
                     onClick={() => toggleShowMore(cat)}
                     className="px-8 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition"
                   >
-                    {visibleCounts[cat] === 15 ? "See More" : "Show Less"}
+                    {visibleCounts[cat] === 15 ? "see more  " : "watch less"}
                   </motion.button>
                 </div>
               )}
