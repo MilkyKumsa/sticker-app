@@ -329,20 +329,17 @@ export default function StickersPage() {
             }}
             // Centered on mobile/small screens, adjust if you want near-button positioning
           >
-            <div className="px-4 py-2 text-center text-sm font-medium text-gray-700 mb-2">
-              Select Size
-            </div>
             <button
               onClick={() => addToCartWithSize(selectedSticker, "Small (4cm)")}
               className="block w-full text-left px-4 py-2.5 hover:bg-indigo-50 text-sm font-medium rounded-lg transition"
             >
-              Small (4 cm)
+              Small(4cm)
             </button>
             <button
               onClick={() => addToCartWithSize(selectedSticker, "Medium (6cm)")}
               className="block w-full text-left px-4 py-2.5 hover:bg-indigo-50 text-sm font-medium rounded-lg transition"
             >
-              Medium (6 cm)
+              Medium (6cm)
             </button>
             <button
               onClick={() => addToCartWithSize(selectedSticker, "Large (9cm)")}
