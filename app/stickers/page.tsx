@@ -65,7 +65,7 @@ export default function StickersPage() {
     setMobileMenuOpen(false);
   };
 
-  const categories = ["Movies", "Spiritual", "Sports", "Tech", "Cool", "eth"];
+  const categories = ["Movies", "Spiritual", "Sports", "Tech", "Cool", "Ethiopia"];
 
   const stickers: Sticker[] = [
     // Movies
